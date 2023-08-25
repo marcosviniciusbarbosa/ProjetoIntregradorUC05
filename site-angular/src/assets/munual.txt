@@ -1,0 +1,27 @@
+=============== MANUAL PARA CRIAR PROJETO EM ANGULAR ===============
+
+Passo 1:
+Abrir Command Prompt(CMD)
+
+Passo 2:
+Especifica a pasta onde ficará o Projeto
+
+Passa 3:
+Comanda para criar novo projeto Angula: "ng new nome_projeto --rounting=true --style=scss"
+
+Passo 4:
+Acessar a pasta do projeto e inicializar o servidor - "ng serve"
+
+
+
+Café em Grão: Desfrute do sabor autêntico do café em sua forma mais pura. Os grãos de café são selecionados e torrados com precisão, proporcionando uma experiência intensa e aromática a cada xícara.
+
+Café Solúvel: Prático e rápido de preparar, o café solúvel é uma opção conveniente para os amantes do café. Basta adicionar água quente e desfrutar de um sabor encorpado e delicioso a qualquer momento.
+
+Café em Cápsulas: A tecnologia das cápsulas revolucionou o mundo do café. Com uma ampla variedade de sabores e intensidades, as cápsulas oferecem uma experiência personalizada e garantem a praticidade na hora de preparar uma xícara de café.
+
+Café em Pó: Versátil e tradicional, o café em pó é uma escolha clássica para os amantes da bebida. Com diferentes níveis de moagem, você pode ajustar o sabor e a intensidade do café de acordo com suas preferências.
+
+Café Gelado: Perfeito para dias quentes, o café gelado é refrescante e cheio de sabor. Seja na forma de cold brew ou misturado com gelo e leite, essa opção é uma maneira deliciosa de aproveitar o café de forma refrescante.
+
+Café Aromatizado: Para os paladares mais ousados, o café aromatizado oferece uma combinação única de sabores. Com opções como baunilha, caramelo, chocolate e muito mais, você pode desfrutar de uma experiência de café ainda mais especial.
