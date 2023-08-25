@@ -11,6 +11,8 @@ import { SobreComponent } from './sobre/sobre.component';
 import { ContatoComponent } from './contato/contato.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ServicosComponent } from './servicos/servicos.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ServicosComponent } from './servicos/servicos.component';
     SobreComponent,
     ContatoComponent,
     ProdutosComponent,
-    ServicosComponent
+    ServicosComponent,
+    PerfilComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
