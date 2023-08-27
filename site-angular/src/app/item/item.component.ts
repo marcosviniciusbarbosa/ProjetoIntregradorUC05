@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ItemComponent {
   itens = [
-    'assets/img/pc1.jpg'
+    'assets/img/itens/pc1.jpg'
   ]
 
 }
