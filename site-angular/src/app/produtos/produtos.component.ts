@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ProdutosComponent {
   public images:string = 'assets/img/banner/card.jpg' 
+  itens = [
+    'assets/img/itens/pc1.jpg'
+  ]
+
 }

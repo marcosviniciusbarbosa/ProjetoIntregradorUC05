@@ -5,16 +5,18 @@ import { HomeComponent } from './home/home.component';
 import { ContatoComponent } from './contato/contato.component';
 import { ServicosComponent } from './servicos/servicos.component';
 import { SobreComponent } from './sobre/sobre.component';
+import { ItemComponent } from './item/item.component';
+import { ProdutosComponent} from './produtos/produtos.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "perfil", component: PerfilComponent},
   { path: "contato", component: ContatoComponent},
   { path: "servicos", component: ServicosComponent},
-  { path: "sobre", component: SobreComponent}
+  { path: "sobre", component: SobreComponent},
+  { path: "item", component: ItemComponent},
+  { path: "produtos", component: ProdutosComponent}
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
