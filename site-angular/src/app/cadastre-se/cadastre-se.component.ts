@@ -3,10 +3,10 @@ import { ServicosService } from '../servicos.service';
 
 @Component({
   selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  templateUrl: './cadastre-se.component.html',
+  styleUrls: ['./cadastre-se.component.scss']
 })
-export class PerfilComponent {
+export class CadastreSeComponent {
 
   public nome: string = ""
   public cpf: string = ""

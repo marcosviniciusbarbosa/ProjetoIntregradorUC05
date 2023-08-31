@@ -1,0 +1,127 @@
+<form class="">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-start">
+        <h2 class="mb-5 text-center">Cadastre-se</h2>
+
+        <div class="row ">
+          <div class="col">
+            <div class="form-group mb-3">
+              <label>Nome</label>
+              <input [(ngModel)]="nome" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>CPF</label>
+              <input [(ngModel)]="cpf" class="form-control" mask="000.000.000-00">
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Data Nascimento</label>
+              <input [(ngModel)]="data_nascimento" class="form-control" type="date">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group mb-3">
+              <label>E-mail</label>
+              <input [(ngModel)]="email" class="form-control" type="email">
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Senha:</label>
+              <input [(ngModel)]="senha" class="form-control">
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Confirmar Senha:</label>
+              <input [(ngModel)]="senha2" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group mb-3">
+              <label>CEP:</label>
+              <div class="input-group">
+                <input [(ngModel)]="cep" class="form-control" mask="00000-000">
+                <span (click)="buscaCEP(this.cep)" class="input-group-text">
+                  <i class="bi bi-search"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group mb-3">
+              <label>Logradouro</label>
+              <input [(ngModel)]="logradouro" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Número</label>
+              <input [(ngModel)]="numero" class="form-control">
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Complemento</label>
+              <input [(ngModel)]="complemento" class="form-control" type="date">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group mb-3">
+              <label>Bairro:</label>
+              <input [(ngModel)]="bairro" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md-10">
+            <div class="form-group mb-3">
+              <label>Cidade</label>
+              <input [(ngModel)]="cidade" class="form-control">
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group mb-3">
+              <label>Estado</label>
+              <input [(ngModel)]="estado" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-outline-primary me-3" type="reset">Limpar</button>
+            <button class="btn btn-primary" (click)="enviaFormulario()">Cadastrar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

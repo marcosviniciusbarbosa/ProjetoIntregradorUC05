@@ -14,6 +14,12 @@ import { ServicosComponent } from './servicos/servicos.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { ServicosService } from './servicos.service';
+import { LoginComponent } from './login/login.component';
+import { CadastreSeComponent } from './cadastre-se/cadastre-se.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +33,24 @@ import { ItemComponent } from './item/item.component';
     ServicosComponent,
     PerfilComponent,
     HomeComponent,
-    ItemComponent
+    ItemComponent,
+    LoginComponent,
+    CadastreSeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    FormsModule,
+    HttpClientModule,
+    NgxMaskPipe,
+    NgxMaskDirective,
+    NgbModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideNgxMask(),
+    ServicosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
