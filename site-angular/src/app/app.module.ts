@@ -20,6 +20,12 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ServicosService } from './servicos.service';
 import { LoginComponent } from './login/login.component';
 import { CadastreSeComponent } from './cadastre-se/cadastre-se.component';
+import { ContaComponent } from './conta/conta.component';
+import { SegurancaComponent } from './seguranca/seguranca.component';
+import { PrivacidadeComponent } from './privacidade/privacidade.component';
+import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
+import { HistoricoComponent } from './historico/historico.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +41,12 @@ import { CadastreSeComponent } from './cadastre-se/cadastre-se.component';
     HomeComponent,
     ItemComponent,
     LoginComponent,
-    CadastreSeComponent
+    CadastreSeComponent,
+    ContaComponent,
+    SegurancaComponent,
+    PrivacidadeComponent,
+    MetodoPagamentoComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
