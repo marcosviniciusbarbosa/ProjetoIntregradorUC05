@@ -25,6 +25,7 @@ import { SegurancaComponent } from './seguranca/seguranca.component';
 import { PrivacidadeComponent } from './privacidade/privacidade.component';
 import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
 import { HistoricoComponent } from './historico/historico.component';
+import { GatewaydepagamentoComponent } from './gatewaydepagamento/gatewaydepagamento.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { HistoricoComponent } from './historico/historico.component';
     SegurancaComponent,
     PrivacidadeComponent,
     MetodoPagamentoComponent,
-    HistoricoComponent
+    HistoricoComponent,
+    GatewaydepagamentoComponent
   ],
   imports: [
     BrowserModule,
