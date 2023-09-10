@@ -1,35 +1,32 @@
-<form class="">
-  <div class="container">
-    <div class="row justify-content-center ">
-      <div class="col-md-6 text-start">
-        <h2 class="mb-5 text-center">Login</h2>
-
-        <div class="row">
-          <div class="col">
-            <div class="form-group mb-3">
-              <label>E-mail</label>
-              <input [(ngModel)]="email" class="form-control" type="email">
-            </div>
-          </div>
+<div style="height:75vh;" class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Aventure-se no Mundo dos Jogos Online"</h1>
+      <p class="col-lg-10 fs-5">Bem-vindo de volta, aventureiro! Estamos ansiosos para continuar esta jornada épica com
+        você. Insira suas credenciais abaixo para mergulhar de volta no reino dos jogos online. Se você é novo por aqui,
+        não se preocupe; sua aventura está prestes a começar! Digite suas informações e prepare-se para explorar um
+        mundo repleto de desafios, conquistas e diversão sem fim. Seja você um herói corajoso ou um estrategista
+        habilidoso, aqui é o seu lugar. Vamos lá, a próxima missão o espera!</p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email</label>
         </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="form-group mb-3">
-              <label>Senha:</label>
-              <input [(ngModel)]="senha" class="form-control">
-            </div>
-          </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Senha</label>
         </div>
-
-        <div class="row">
-          <div class="col d-flex justify-content-between">
-            <button class="btn btn-outline-primary me-3">Entrar</button>
-            <span class="ms-6">Não possui cadastro? <a href="/cadastre-se">Cadastre-se</a></span>
-          </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me">Lembre-me
+          </label>
         </div>
-      </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+        <hr class="my-4">
+        <small class="text-body-secondary">Ao clicar em Cadastrar, você concorda com os termos de uso.</small>
+      </form>
     </div>
   </div>
-
-
+</div>
