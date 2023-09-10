@@ -16,7 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+// import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ServicosService } from './servicos.service';
 import { LoginComponent } from './login/login.component';
 import { CadastreSeComponent } from './cadastre-se/cadastre-se.component';
@@ -25,7 +25,7 @@ import { SegurancaComponent } from './seguranca/seguranca.component';
 import { PrivacidadeComponent } from './privacidade/privacidade.component';
 import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
 import { HistoricoComponent } from './historico/historico.component';
-import { GatewaydepagamentoComponent } from './gatewaydepagamento/gatewaydepagamento.component';
+// import { GatewaydepagamentoComponent } from './gatewaydepagamento/gatewaydepagamento.component';
 
 
 @NgModule({
@@ -48,20 +48,20 @@ import { GatewaydepagamentoComponent } from './gatewaydepagamento/gatewaydepagam
     PrivacidadeComponent,
     MetodoPagamentoComponent,
     HistoricoComponent,
-    GatewaydepagamentoComponent
+    // GatewaydepagamentoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxMaskPipe,
-    NgxMaskDirective,
+    // NgxMaskPipe,
+    // NgxMaskDirective,
     NgbModule,
     ReactiveFormsModule
   ],
   providers: [
-    provideNgxMask(),
+    // provideNgxMask(),
     ServicosService
   ],
   bootstrap: [AppComponent]
