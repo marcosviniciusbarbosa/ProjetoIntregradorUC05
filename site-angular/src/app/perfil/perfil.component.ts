@@ -8,6 +8,11 @@ import { ServicosService } from '../servicos.service';
 })
 export class PerfilComponent {
 
+    itens = [
+      'assets/img/itens/pc1.jpg'
+    ]
+
+
   public nome: string = ""
   public cpf: string = ""
   public senha: string = ""
