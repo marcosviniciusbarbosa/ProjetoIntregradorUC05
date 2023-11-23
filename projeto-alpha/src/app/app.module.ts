@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ClientesComponent } from './clientes/clientes.component';
     MenuComponent,
     HeaderComponent,
     HomeComponent,
-    ClientesComponent
+    ClientesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,9 @@ import { ClientesComponent } from './clientes/clientes.component';
     NbSelectModule,
     NbActionsModule,
     NbUserModule,
-    NbSearchModule
+    NbSearchModule,
+    NbSidebarModule,
+    NbLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
