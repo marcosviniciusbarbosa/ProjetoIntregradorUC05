@@ -15,13 +15,15 @@ export class ModalColaboradoresComponent {
   private api: string = 'apiColaboradoress.php';
   public loading: boolean = false;
   public mask_cpf: string = '000.000.000-00';
+  public mask_cnpj: string = '00.000.000/0000-0';
   public formulario: FormGroup = this._formBuilder.group({
-    id_Colaboradores: [this.id, [Validators.required]],
+    id_cliente: [this.id, [Validators.required]],
     nome: [null, [Validators.required]],
     telefone: [null, [Validators.required]],
     genero: [null, [Validators.required]],
     data_nascimento: [null],
-    nr_dog: [null, [Validators.required, Validators.minLength(11)]],
+    cpf: [null, [Validators.required, Validators.minLength(11)]],
+    cnpj: [null, [Validators.required, Validators.minLength(13)]],
     foto: [null],
     status: ['1', [Validators.required]],
     tipo: ['1', [Validators.required]],

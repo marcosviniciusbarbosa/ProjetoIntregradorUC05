@@ -46,9 +46,9 @@ export class HeaderComponent implements OnInit {
   changeTheme(themeName: string) {
     this._themeService.changeTheme(themeName);
     if (themeName !== 'default') {
-      this.logoHeader = 'assets/images/logo/barbearia-blue-transparent-logo.png';
+      this.logoHeader = 'assets/images/logo/barbearia-white-transparent-logo.png';
     } else {
-      this.logoHeader = 'assets/images/logo/barbearia-black-transparent-logo.png';
+      this.logoHeader = 'assets/images/logo/barbearia-blue-transparent-logo.png';
     }
   }
 }
