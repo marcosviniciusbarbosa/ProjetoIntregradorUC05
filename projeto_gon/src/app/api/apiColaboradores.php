@@ -9,9 +9,9 @@ $method = $_SERVER["REQUEST_METHOD"];
 include("connection.php");
 
 if ($method == "GET") {
-    if (!isset($_GET["id_cliente"]) && !isset($_GET["cpf"])) {
+    if (!isset($_GET["id_colaborador"]) && !isset($_GET["nr_doc"])) {
         try {
-            $sql = "SELECT * FROM `clientes` ORDER by STATUS desc";
+            $sql = "SELECT * FROM `colaboradores` ORDER by STATUS desc";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -30,27 +30,27 @@ if ($method == "GET") {
             $conn = null;
             echo json_encode($result);
         }
-    } elseif (isset($_GET["id_cliente"]) || isset($_GET["cpf"])) {
+    } elseif (isset($_GET["id_colaborador"]) || isset($_GET["cpf"])) {
         try {
-            if ((empty($_GET["id_cliente"]) || !is_numeric($_GET["id_cliente"])) && (empty($_GET["cpf"]) || !is_numeric($_GET["cpf"]))) {
+            if ((empty($_GET["id_colaborador"]) || !is_numeric($_GET["id_colaborador"])) && (empty($_GET["cpf"]) || !is_numeric($_GET["cpf"]))) {
                 // está vazio ou não é numérico : ERRO
                 throw new ErrorException("Valor inválido 1", 1);
             }
 
-            if (isset($_GET["id_cliente"]) || !isset($_GET["cpf"])) {
+            if (isset($_GET["id_colaborador"]) || !isset($_GET["cpf"])) {
 
-                $id_cliente = $_GET["id_cliente"];
+                $id_colaborador = $_GET["id_colaborador"];
 
-                $sql = "SELECT * FROM clientes
-                    WHERE id_cliente =:id_cliente";
+                $sql = "SELECT * FROM colaboradores
+                    WHERE id_colaborador =:id_colaborador";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(":id_cliente", $id_cliente);
-            } elseif (!isset($_GET["id_cliente"]) || isset($_GET["cpf"])) {
+                $stmt->bindParam(":id_colaborador", $id_colaborador);
+            } elseif (!isset($_GET["id_colaborador"]) || isset($_GET["cpf"])) {
 
                 $cpf =  $_GET["cpf"];
 
-                $sql = "SELECT * FROM clientes
+                $sql = "SELECT * FROM colaboradores
                     WHERE cpf =:cpf";
 
                 $stmt = $conn->prepare($sql);
@@ -104,7 +104,7 @@ if ($method == "POST") {
             // está vazio  : ERRO
             throw new ErrorException("Campo não preenchido!", 1);
         }
-        $sql = "INSERT INTO clientes (nome, cpf, telefone,cep, genero, data_nascimento, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
+        $sql = "INSERT INTO colaboradores (nome, cpf, telefone,cep, genero, data_nascimento, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
                 VALUES (:nome, :cpf, :telefone,:cep,:genero, :data_nascimento, :foto, :status,:logradouro,:numero,:complemento,:bairro,:cidade,:uf)";
 
         $stmt = $conn->prepare($sql);
@@ -145,7 +145,7 @@ if ($method == "PUT") {
     $dados = $postjson['form'];
 
     // função trim retira espaços que estão sobrando
-    $id_cliente = trim($dados['id_cliente']); // acessa valor de um OBJETO
+    $id_colaborador = trim($dados['id_colaborador']); // acessa valor de um OBJETO
     $uf = trim($dados['uf']); // acessa valor de um OBJETO
     $nome = trim($dados['nome']); // acessa valor de um OBJETO
     $cep = trim($dados['cep']); // acessa valor de um OBJETO
@@ -169,7 +169,7 @@ if ($method == "PUT") {
 
         $sql = "
                 UPDATE 
-                    clientes
+                    colaboradores
                 SET 
                     nome=:nome, 
                     cpf=:cpf, 
@@ -186,11 +186,11 @@ if ($method == "PUT") {
                     foto=:foto, 
                     status=:status
                 WHERE 
-                    id_cliente=:id_cliente
+                    id_colaborador=:id_colaborador
                 ";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":id_cliente", $id_cliente);
+        $stmt->bindParam(":id_colaborador", $id_colaborador);
         $stmt->bindParam(":nome", $nome);
         $stmt->bindParam(":cpf", $cpf);
         $stmt->bindParam(":telefone", $telefone);
@@ -224,17 +224,17 @@ if ($method == "PUT") {
 if ($method == "DELETE") {
     try {
 
-        if (empty($_GET["id_cliente"]) || !is_numeric($_GET["id_cliente"])) {
+        if (empty($_GET["id_colaborador"]) || !is_numeric($_GET["id_colaborador"])) {
             // está vazio ou não é numérico : ERRO
             throw new ErrorException("Valor inválido", 1);
         }
-        $id_cliente = $_GET["id_cliente"];
+        $id_colaborador = $_GET["id_colaborador"];
 
-        $sql = "DELETE FROM clientes
-                WHERE id_cliente=:id_cliente";
+        $sql = "DELETE FROM colaboradores
+                WHERE id_colaborador=:id_colaborador";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":id_cliente", $id_cliente);
+        $stmt->bindParam(":id_colaborador", $id_colaborador);
         $stmt->execute();
 
         $result["status"] = "success";
