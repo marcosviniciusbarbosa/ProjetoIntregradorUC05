@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbSidebarService, NbThemeService, NbToggleModule } from '@nebular/theme';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent implements OnInit {
   public currentTheme: string = 'default';
-  public logoHeader: string =
-    'assets/images/logo/barbearia-blue-transparent-logo.png';
+  public logoHeader: string = 'assets/images/logo/barbearia-icon-logo-logo.png';
 
   public themes: any[] = [
     {
@@ -43,12 +44,13 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  changeTheme(themeName: string) {
-    this._themeService.changeTheme(themeName);
-    if (themeName !== 'default') {
-      this.logoHeader = 'assets/images/logo/barbearia-white-transparent-logo.png';
+  changeTheme(theme: boolean) { 
+    if (theme) {
+      this.logoHeader = 'assets/images/logo/barbearia-icon-white-logo.png';
+      this._themeService.changeTheme('dark');
     } else {
-      this.logoHeader = 'assets/images/logo/barbearia-blue-transparent-logo.png';
+      this.logoHeader = 'assets/images/logo/barbearia-icon-logo-logo.png';
+      this._themeService.changeTheme('default');
     }
   }
 }

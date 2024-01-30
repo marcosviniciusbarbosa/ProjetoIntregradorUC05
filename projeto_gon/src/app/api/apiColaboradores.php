@@ -96,22 +96,22 @@ if ($method == "POST") {
     $telefone = trim($dados['telefone']); // acessa valor de um OBJETO
     $logradouro = trim($dados['logradouro']); // acessa valor de um OBJETO
     $complemento = trim($dados['complemento']); // acessa valor de um OBJETO
-    $data_nascimento = trim($dados['data_nascimento']); // acessa valor de um OBJETO
+    $data_cadastro = trim($dados['data_cadastro']); // acessa valor de um OBJETO
 
     try {
         if (empty($nome) || empty($telefone) || empty($cpf_cnpj)) {
             // está vazio  : ERRO
             throw new ErrorException("Campo não preenchido!", 1);
         }
-        $sql = "INSERT INTO colaboradores (nome, cpf_cnpj, telefone,cep, data_nascimento, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
-                VALUES (:nome, :cpf_cnpj, :telefone,:cep,:data_nascimento, :foto, :status,:logradouro,:numero,:complemento,:bairro,:cidade,:uf)";
+        $sql = "INSERT INTO colaboradores (nome, cpf_cnpj, telefone,cep, data_cadastro, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
+                VALUES (:nome, :cpf_cnpj, :telefone,:cep,:data_cadastro, :foto, :status,:logradouro,:numero,:complemento,:bairro,:cidade,:uf)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":nome", $nome);
         $stmt->bindParam(":cpf_cnpj", $cpf_cnpj);
         $stmt->bindParam(":telefone", $telefone);
         $stmt->bindParam(":cep", $cep);
-        $stmt->bindParam(":data_nascimento", $data_nascimento);
+        $stmt->bindParam(":data_cadastro", $data_cadastro);
         $stmt->bindParam(":foto", $foto);
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":logradouro", $logradouro);
@@ -156,7 +156,7 @@ if ($method == "PUT") {
     $telefone = trim($dados['telefone']); // acessa valor de um OBJETO
     $logradouro = trim($dados['logradouro']); // acessa valor de um OBJETO
     $complemento = trim($dados['complemento']); // acessa valor de um OBJETO
-    $data_nascimento = trim($dados['data_nascimento']); // acessa valor de um OBJETO
+    $data_cadastro = trim($dados['data_cadastro']); // acessa valor de um OBJETO
 
     try {
         if (empty($id_colaborador) || empty($nome) || empty($telefone) || empty($cpf_cnpj)) {
@@ -172,7 +172,7 @@ if ($method == "PUT") {
                     cpf_cnpj=:cpf_cnpj, 
                     telefone=:telefone, 
                     cep=:cep, 
-                    data_nascimento=:data_nascimento,
+                    data_cadastro=:data_cadastro,
                     logradouro=:logradouro,
                     numero=:numero,
                     complemento=:complemento,
@@ -191,7 +191,7 @@ if ($method == "PUT") {
         $stmt->bindParam(":cpf_cnpj", $cpf_cnpj);
         $stmt->bindParam(":telefone", $telefone);
         $stmt->bindParam(":cep", $cep);
-        $stmt->bindParam(":data_nascimento", $data_nascimento);
+        $stmt->bindParam(":data_cadastro", $data_cadastro);
         $stmt->bindParam(":foto", $foto);
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":logradouro", $logradouro);

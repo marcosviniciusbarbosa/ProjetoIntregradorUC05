@@ -1,6 +1,6 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <nb-card class="nb-card-modal card-padding" size="large" [nbSpinner]="loading">
-        <nb-card-header>Cadastro de Clientes
+        <nb-card-header>Cadastro de Colaborador
             <button type="button" nbButton ghost class="close float-end" (click)="close()" size="tiny">
                 <nb-icon icon="close-outline"></nb-icon>
             </button>
@@ -8,27 +8,26 @@
         <nb-card-body>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <div class="mb-3">
                             <label class="label">Tipo</label>
-                            <nb-select placeholder="Selecione o status" fullWidth formControlName="tipo"
+                            <nb-select placeholder="Selecione o status" fullWidth formControlName="tipo" (selectedChange)="changeTipo($event)"
                                 [status]="!formulario.controls['tipo'].valid ? 'danger' : 'basic'">
                                 <nb-option value="0">CNPJ</nb-option>
                                 <nb-option value="1">CPF</nb-option>
                             </nb-select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-2">
+                    <div class="col-12 col-md-2 ms-4">
                         <div class="mb-3">
-                            <label class="label">Cpf <span class="text-danger">*</span></label>
-                            <nb-form-field>
-                                <input fullWidth nbInput formControlName="cpf_cnpj" placeholder="Digite o número CPF"
-                                    [status]="!formulario.controls['cpf_cnpj'].valid ? 'danger' : 'basic'"
-                                    (blur)="getColaboradores(formulario.value.cpf_cnpj, 0)">
-                            </nb-form-field>
+                            <label class="label">Status</label>
+                            <nb-select placeholder="Selecione o status" fullWidth formControlName="status"
+                                [status]="!formulario.controls['status'].valid ? 'danger' : 'basic'">
+                                <nb-option value="1">Ativo</nb-option>
+                                <nb-option value="0">Inativo</nb-option>
+                            </nb-select>
                         </div>
                     </div>
-
                     <!-- <div class="col-12 col-md-2" *ngIf="formulario.value.tipo === '0'">
                         <div class="mb-3">
                             <label class="label">Cnpj<span class="text-danger">*</span></label>
@@ -42,17 +41,18 @@
                     </div> -->
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <div class="mb-3">
-                            <label class="label">Status</label>
-                            <nb-select placeholder="Selecione o status" fullWidth formControlName="status"
-                                [status]="!formulario.controls['status'].valid ? 'danger' : 'basic'">
-                                <nb-option value="1">Ativo</nb-option>
-                                <nb-option value="0">Inativo</nb-option>
-                            </nb-select>
+                            <label class="label">CPF/CNPJ <span class="text-danger">*</span></label>
+                            <nb-form-field>
+                                <input fullWidth nbInput formControlName="cpf_cnpj" placeholder="Digite CPF/CNPJ"
+                                    [mask]="mask"
+                                    [status]="!formulario.controls['cpf_cnpj'].valid ? 'danger' : 'basic'"
+                                    (blur)="getColaboradores(formulario.value.cpf_cnpj, 0)">
+                            </nb-form-field>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-6">
                         <div class="mb-3">
                             <label class="label">Nome <span class="text-danger">*</span></label>
                             <input fullWidth nbInput formControlName="nome"
@@ -62,9 +62,9 @@
                     </div>
                     <div class="col-12 col-md-2">
                         <div class="mb-3">
-                            <label class="label">Data Nascimento</label>
+                            <label class="label">Data Cadastro</label>
                             <input type="date" nbInput fullWidth placeholder="Digite a data"
-                                formControlName="data_nascimento">
+                                formControlName="data_cadastro">
                         </div>
                     </div>
                     <div class="col-12 col-md-2">

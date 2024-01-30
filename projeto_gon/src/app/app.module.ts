@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbIconModule, NbSelectModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbMenuModule, NbToastrModule, NbDialogModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbIconModule, NbSelectModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbMenuModule, NbToastrModule, NbDialogModule, NbToggleModule} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { ApiService } from './services/ApiService';
@@ -46,7 +46,8 @@ import { ModalModule } from './views/modal/modal.module';
     NbDialogModule.forRoot({ context: String }),
     HttpClientModule,
     PagesModule,
-    ModalModule
+    ModalModule,
+    NbToggleModule,
   ],
   providers: [
     ApiService,

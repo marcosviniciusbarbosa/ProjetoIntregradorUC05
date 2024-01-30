@@ -14,13 +14,12 @@ export class ModalColaboradoresComponent {
 
   private api: string = 'apiColaboradores.php';
   public loading: boolean = false;
-  public mask_cpf: string = '000.000.000-00';
-  public mask_cnpj: string = '00.000.000/0000-0';
+  public mask: string = '000.000.000-00';
   public formulario: FormGroup = this._formBuilder.group({
     id_colaborador: [this.id, [Validators.required]],
     nome: [null, [Validators.required]],
     telefone: [null, [Validators.required]],
-    data_nascimento: [null],
+    data_cadastro: [this.formatarDataParaInputDate(new Date()), [Validators.required]],
     cpf_cnpj: [null, [Validators.required, Validators.minLength(11)]],
     foto: [null],
     status: ['1', [Validators.required]],
@@ -33,6 +32,14 @@ export class ModalColaboradoresComponent {
     cidade: [null],
     uf: [null],
   });
+
+  private formatarDataParaInputDate(data: Date): string {
+    const ano = data.getFullYear();
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Adiciona zero à esquerda se necessário
+    const dia = data.getDate().toString().padStart(2, '0'); // Adiciona zero à esquerda se necessário
+
+    return `${ano}-${mes}-${dia}`;
+  }
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -120,9 +127,8 @@ export class ModalColaboradoresComponent {
               id_colaborador: data['result'].id_colaborador,
               nome: data['result'].nome,
               cpf_cnpj: data['result'].cpf_cnpj,
-              genero: data['result'].genero,
               telefone: data['result'].telefone,
-              data_nascimento: data['result'].data_nascimento,
+              data_cadastro: data['result'].data_cadastro,
               foto: data['result'].foto,
               cep: data['result'].cep,
               logradouro: data['result'].logradouro,
@@ -191,5 +197,19 @@ export class ModalColaboradoresComponent {
   }
   close() {
     this._dialogRef.close();
+  }
+
+  changeTipo(tipo: number){
+    if(tipo == 0){
+      this.mask = '00.000.000/0000-00';
+      this.formulario.patchValue({
+        cpf_cnpj: ''
+      });
+    }else{
+      this.mask = '000.000.000-00'
+      this.formulario.patchValue({
+        cpf_cnpj: ''
+      });
+    }
   }
 }
