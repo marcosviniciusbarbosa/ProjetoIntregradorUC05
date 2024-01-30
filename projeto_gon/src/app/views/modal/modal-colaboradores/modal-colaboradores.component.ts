@@ -12,18 +12,16 @@ export class ModalColaboradoresComponent {
   @Input() id: number = 0;
   metodo: string = 'POST';
 
-  private api: string = 'apiColaboradoress.php';
+  private api: string = 'apiColaboradores.php';
   public loading: boolean = false;
   public mask_cpf: string = '000.000.000-00';
   public mask_cnpj: string = '00.000.000/0000-0';
   public formulario: FormGroup = this._formBuilder.group({
-    id_cliente: [this.id, [Validators.required]],
+    id_colaborador: [this.id, [Validators.required]],
     nome: [null, [Validators.required]],
     telefone: [null, [Validators.required]],
-    genero: [null, [Validators.required]],
     data_nascimento: [null],
-    cpf: [null, [Validators.required, Validators.minLength(11)]],
-    cnpj: [null, [Validators.required, Validators.minLength(13)]],
+    cpf_cnpj: [null, [Validators.required, Validators.minLength(11)]],
     foto: [null],
     status: ['1', [Validators.required]],
     tipo: ['1', [Validators.required]],
@@ -79,15 +77,15 @@ export class ModalColaboradoresComponent {
     }
   }
 
-  getColaboradores(cpf: string, id: number) {
+  getColaboradores(cpf_cnpj: string, id: number) {
     this.loading = true;
 
     let url = '';
 
-    if (cpf.length > 0) {
-      url = this.api + '?cpf=' + cpf;
+    if (cpf_cnpj.length > 0) {
+      url = this.api + '?cpf_cnpj=' + cpf_cnpj;
     } else if (id > 0) {
-      url = this.api + '?id_Colaboradores=' + id;
+      url = this.api + '?id_colaborador=' + id;
     }
 
     return this._provider.getAPI(url).subscribe(
@@ -98,21 +96,30 @@ export class ModalColaboradoresComponent {
           if (this.metodo == 'POST') {
             this._provider.showToast('OPS!', 'CPF já cadastrado!', 'warning');
             this.formulario.reset();
+            this.formulario.patchValue({
+              tipo: '0'
+            });
           } else if (
             this.metodo == 'PUT' &&
             this.formulario.get(['nome'])?.value &&
             this.formulario.get(['nome'])?.value !== data['result'].nome
           ) {
             this._provider.showToast('OPS!', 'CPF já cadastrado!', 'warning');
-            cpf = this.formulario.get(['cpf'])?.value;
-            this.formulario.patchValue({
-              cpf: '',
-            });
+            cpf_cnpj = this.formulario.get(['cpf_cnpj'])?.value;
+            if (data['tipo'] == 0){
+              this.formulario.patchValue({
+                cpf: ''
+              });
+            } else {
+              this.formulario.patchValue({
+                cnpj: ''
+              });
+            }
           } else {
             this.formulario.patchValue({
-              id_Colaboradores: data['result'].id_Colaboradores,
+              id_colaborador: data['result'].id_colaborador,
               nome: data['result'].nome,
-              ng_dog: data['result'].cpf_cnpj,
+              cpf_cnpj: data['result'].cpf_cnpj,
               genero: data['result'].genero,
               telefone: data['result'].telefone,
               data_nascimento: data['result'].data_nascimento,

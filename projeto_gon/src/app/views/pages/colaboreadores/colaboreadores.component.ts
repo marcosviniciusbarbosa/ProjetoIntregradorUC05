@@ -48,8 +48,8 @@ export class ColaboreadoresComponent {
         width: '55%',
         sortDirection: 'asc',
       },
-      cpf: {
-        title: 'CPF',
+      cpf_cnpj: {
+        title: 'CPF/CNPJ',
         classContent: 'text-center',
       },
       telefone: {
@@ -64,7 +64,7 @@ export class ColaboreadoresComponent {
         type: IColumnType.Html,
       },
     },
-  };  
+  };
 
   constructor(
     private _provider: ApiService,
@@ -73,11 +73,11 @@ export class ColaboreadoresComponent {
     // CARREGAR DADOS NA TABELA
     this.getDados();
   }
-  
+
   getDados() {
     this.loading = true;
     this.source = new LocalDataSource();
-    
+
     let url = 'apiColaboradores.php';
 
     return this._provider.getAPI(url).subscribe(data => {
@@ -107,15 +107,15 @@ export class ColaboreadoresComponent {
   }
 
   ngOnInit(): void {
-    
+
   }
-  
+
 
   onOptions(event: any) {
 
     if (event.action == 'edit') {
       // OPÇÃO PARA EDITAR
-      this.showDialog(event.data.id_cliente,'PUT');
+      this.showDialog(event.data.id_colaborador,'PUT');
     }
 
   }

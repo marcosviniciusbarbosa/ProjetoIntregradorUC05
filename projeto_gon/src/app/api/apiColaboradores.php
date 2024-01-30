@@ -9,7 +9,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 include("connection.php");
 
 if ($method == "GET") {
-    if (!isset($_GET["id_colaborador"]) && !isset($_GET["nr_doc"])) {
+    if (!isset($_GET["id_colaborador"]) && !isset($_GET["cpf_cnpj"])) {
         try {
             $sql = "SELECT * FROM `colaboradores` ORDER by STATUS desc";
 
@@ -30,14 +30,14 @@ if ($method == "GET") {
             $conn = null;
             echo json_encode($result);
         }
-    } elseif (isset($_GET["id_colaborador"]) || isset($_GET["cpf"])) {
+    } elseif (isset($_GET["id_colaborador"]) || isset($_GET["cpf_cnpj"])) {
         try {
-            if ((empty($_GET["id_colaborador"]) || !is_numeric($_GET["id_colaborador"])) && (empty($_GET["cpf"]) || !is_numeric($_GET["cpf"]))) {
+            if ((empty($_GET["id_colaborador"]) || !is_numeric($_GET["id_colaborador"])) && (empty($_GET["cpf_cnpj"]) || !is_numeric($_GET["cpf_cnpj"]))) {
                 // está vazio ou não é numérico : ERRO
                 throw new ErrorException("Valor inválido 1", 1);
             }
 
-            if (isset($_GET["id_colaborador"]) || !isset($_GET["cpf"])) {
+            if (isset($_GET["id_colaborador"]) || !isset($_GET["cpf_cnpj"])) {
 
                 $id_colaborador = $_GET["id_colaborador"];
 
@@ -46,15 +46,15 @@ if ($method == "GET") {
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":id_colaborador", $id_colaborador);
-            } elseif (!isset($_GET["id_colaborador"]) || isset($_GET["cpf"])) {
+            } elseif (!isset($_GET["id_colaborador"]) || isset($_GET["cpf_cnpj"])) {
 
-                $cpf =  $_GET["cpf"];
+                $cpf_cnpj =  $_GET["cpf_cnpj"];
 
                 $sql = "SELECT * FROM colaboradores
-                    WHERE cpf =:cpf";
+                    WHERE cpf_cnpj =:cpf_cnpj";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(":cpf", $cpf);
+                $stmt->bindParam(":cpf_cnpj", $cpf_cnpj);
             }
 
             $stmt->execute();
@@ -87,9 +87,8 @@ if ($method == "POST") {
     $uf = trim($dados['uf']); // acessa valor de um OBJETO
     $nome = trim($dados['nome']); // acessa valor de um OBJETO
     $cep = trim($dados['cep']); // acessa valor de um OBJETO
-    $cpf = trim($dados['cpf']); // acessa valor de um OBJETO
+    $cpf_cnpj = trim($dados['cpf_cnpj']); // acessa valor de um OBJETO
     $foto = trim($dados['foto']); // acessa valor de um OBJETO
-    $genero = trim($dados['genero']); // acessa valor de um OBJETO
     $status = trim($dados['status']); // acessa valor de um OBJETO
     $numero = trim($dados['numero']); // acessa valor de um OBJETO
     $bairro = trim($dados['bairro']); // acessa valor de um OBJETO
@@ -100,20 +99,19 @@ if ($method == "POST") {
     $data_nascimento = trim($dados['data_nascimento']); // acessa valor de um OBJETO
 
     try {
-        if (empty($nome) || empty($telefone) || empty($cpf) || empty($genero)) {
+        if (empty($nome) || empty($telefone) || empty($cpf_cnpj)) {
             // está vazio  : ERRO
             throw new ErrorException("Campo não preenchido!", 1);
         }
-        $sql = "INSERT INTO colaboradores (nome, cpf, telefone,cep, genero, data_nascimento, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
-                VALUES (:nome, :cpf, :telefone,:cep,:genero, :data_nascimento, :foto, :status,:logradouro,:numero,:complemento,:bairro,:cidade,:uf)";
+        $sql = "INSERT INTO colaboradores (nome, cpf_cnpj, telefone,cep, data_nascimento, foto, status,logradouro,numero,complemento,bairro,cidade,uf)
+                VALUES (:nome, :cpf_cnpj, :telefone,:cep,:data_nascimento, :foto, :status,:logradouro,:numero,:complemento,:bairro,:cidade,:uf)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":nome", $nome);
-        $stmt->bindParam(":cpf", $cpf);
+        $stmt->bindParam(":cpf_cnpj", $cpf_cnpj);
         $stmt->bindParam(":telefone", $telefone);
         $stmt->bindParam(":cep", $cep);
         $stmt->bindParam(":data_nascimento", $data_nascimento);
-        $stmt->bindParam(":genero", $genero);
         $stmt->bindParam(":foto", $foto);
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":logradouro", $logradouro);
@@ -149,9 +147,8 @@ if ($method == "PUT") {
     $uf = trim($dados['uf']); // acessa valor de um OBJETO
     $nome = trim($dados['nome']); // acessa valor de um OBJETO
     $cep = trim($dados['cep']); // acessa valor de um OBJETO
-    $cpf = trim($dados['cpf']); // acessa valor de um OBJETO
+    $cpf_cnpj = trim($dados['cpf_cnpj']); // acessa valor de um OBJETO
     $foto = trim($dados['foto']); // acessa valor de um OBJETO
-    $genero = trim($dados['genero']); // acessa valor de um OBJETO
     $status = trim($dados['status']); // acessa valor de um OBJETO
     $numero = trim($dados['numero']); // acessa valor de um OBJETO
     $bairro = trim($dados['bairro']); // acessa valor de um OBJETO
@@ -162,7 +159,7 @@ if ($method == "PUT") {
     $data_nascimento = trim($dados['data_nascimento']); // acessa valor de um OBJETO
 
     try {
-        if (empty($nome) || empty($telefone)) {
+        if (empty($id_colaborador) || empty($nome) || empty($telefone) || empty($cpf_cnpj)) {
             // está vazio  : ERRO
             throw new ErrorException("Campo não preenchido!", 1);
         }
@@ -172,10 +169,9 @@ if ($method == "PUT") {
                     colaboradores
                 SET 
                     nome=:nome, 
-                    cpf=:cpf, 
+                    cpf_cnpj=:cpf_cnpj, 
                     telefone=:telefone, 
                     cep=:cep, 
-                    genero=:genero, 
                     data_nascimento=:data_nascimento,
                     logradouro=:logradouro,
                     numero=:numero,
@@ -192,11 +188,10 @@ if ($method == "PUT") {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":id_colaborador", $id_colaborador);
         $stmt->bindParam(":nome", $nome);
-        $stmt->bindParam(":cpf", $cpf);
+        $stmt->bindParam(":cpf_cnpj", $cpf_cnpj);
         $stmt->bindParam(":telefone", $telefone);
         $stmt->bindParam(":cep", $cep);
         $stmt->bindParam(":data_nascimento", $data_nascimento);
-        $stmt->bindParam(":genero", $genero);
         $stmt->bindParam(":foto", $foto);
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":logradouro", $logradouro);
