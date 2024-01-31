@@ -37,7 +37,7 @@ if ($method == "GET") {
                 throw new ErrorException("Valor inválido 1", 1);
             }
 
-            if (isset($_GET["id_cliente"]) && !isset($_GET["cpf"])) {
+            if (isset($_GET["id_cliente"]) || !isset($_GET["cpf"])) {
 
                 $id_cliente = $_GET["id_cliente"];
 
@@ -46,7 +46,7 @@ if ($method == "GET") {
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":id_cliente", $id_cliente);
-            } elseif (!isset($_GET["id_cliente"]) && isset($_GET["cpf"])) {
+            } elseif (!isset($_GET["id_cliente"]) || isset($_GET["cpf"])) {
 
                 $cpf =  $_GET["cpf"];
 
