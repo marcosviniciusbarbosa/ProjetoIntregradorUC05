@@ -30,7 +30,7 @@ export class ServicosComponent {
       perPageSelectLabel: 'Total: ',
     },
     add: {
-      addButtonContent: '<i class="bi bi-plus"></i>',
+      addButtonContent: '<i class="bi bi-plus-square fs-5"></i>',
     },
     actions: {
       columnTitle: '',
@@ -40,31 +40,33 @@ export class ServicosComponent {
       custom: [
         {
           name: 'edit',
-          title: '<i class="bi bi-pencil mb-2"></i>',
+          title: '<div class="text-center"><i class="bi bi-pencil-square"></i></div>',
         },
       ],
     },
     columns: {
       nome: {
         title: 'NOME',
+        width: '50%',
         sortDirection: 'asc',
       },
-      cpf: {
-        title: 'CPF',
+      temp_format: {
+        title: 'TEMPO MIN',
         classContent: 'text-center',
       },
-      telefone: {
-        title: 'TELEFONE',
+      val_format: {
+        title: 'VALOR',
+        width: '90px',
         classContent: 'text-center',
       },
       status: {
         title: 'STATUS',
-        width: '50px',
+        classContent: 'text-center',
         sortDirection: 'desc',
         type: IColumnType.Html,
       },
     },
-  };  
+  };      
 
   constructor(
     private _provider: ApiService,
@@ -78,7 +80,7 @@ export class ServicosComponent {
     this.loading = true;
     this.source = new LocalDataSource();
     
-    let url = 'lista_clientes.php';
+    let url = 'apiServicos.php';
 
     return this._provider.getAPI(url).subscribe(data => {
         // CARREGAR DADOS NA TABELA
@@ -115,7 +117,7 @@ export class ServicosComponent {
 
     if (event.action == 'edit') {
       // OPÇÃO PARA EDITAR
-      this.showDialog(event.data.id_cliente,'PUT');
+      this.showDialog(event.data.id_servico,'PUT');
     }
 
   }

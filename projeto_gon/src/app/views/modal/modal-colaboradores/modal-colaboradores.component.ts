@@ -95,8 +95,7 @@ export class ModalColaboradoresComponent {
       url = this.api + '?id_colaborador=' + id;
     }
 
-    return this._provider.getAPI(url).subscribe(
-      (data: any) => {
+    return this._provider.getAPI(url).subscribe((data: any) => {
         if (data['status'] == 'fail' || data['result'] == false) {
           // this._provider.showToast('OPS!', 'CPF não é cadastrado!', 'warning');
         } else if (data['where'] == true) {
@@ -195,6 +194,7 @@ export class ModalColaboradoresComponent {
       );
     }
   }
+
   close() {
     this._dialogRef.close();
   }
