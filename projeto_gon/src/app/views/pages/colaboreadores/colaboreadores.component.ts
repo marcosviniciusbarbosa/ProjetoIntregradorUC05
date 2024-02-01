@@ -7,8 +7,43 @@ import { ApiService } from 'src/app/services/ApiService';
 import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
 import { ModalColaboradoresComponent } from '../../modal/modal-colaboradores/modal-colaboradores.component';
 
-type NewType = number;
+import { ServicosComponent } from '../servicos/servicos.component';
 
+
+@Component({
+  template: `
+  <div class="text-center">
+    <a class="d-flex justify-content-center align-items-center" status="info" (click)="onSetor()"><i class="bi bi-list-ul fs-3"></i></a>
+  </div>
+  `,
+  styleUrls: ['./colaboreadores.component.scss']
+})
+export class BtnServicosComponent implements OnInit {
+
+  @Input() rowData: any;
+
+  constructor(
+    private _dialogService: NbDialogService,
+  ) { }
+
+  ngOnInit() {
+  }
+
+  onSetor() {
+    this._dialogService.open(ServicosComponent, {
+      context: {
+        id_colaborador: this.rowData.id_colaborador,
+      },
+      closeOnEsc: true,
+      hasBackdrop: true,
+      closeOnBackdropClick: false,
+      hasScroll: true
+    });
+  }
+
+}
+
+type NewType = number;
 @Component({
   selector: 'app-colaboreadores',
   templateUrl: './colaboreadores.component.html',
@@ -45,7 +80,7 @@ export class ColaboreadoresComponent {
     columns: {
       nome: {
         title: 'NOME',
-        width: '55%',
+        width: '45%',
         sortDirection: 'asc',
       },
       cpf_cnpj: {
@@ -62,6 +97,13 @@ export class ColaboreadoresComponent {
         classContent: 'text-center',
         sortDirection: 'desc',
         type: IColumnType.Html,
+      },
+      ocupacoes: {
+        // title: 'SERVIÇOS',
+        type: IColumnType.Custom,
+        renderComponent: BtnServicosComponent,
+        isFilterable: false,
+        isSortable: false
       },
     },
   };
@@ -99,9 +141,9 @@ export class ColaboreadoresComponent {
   status(result: any[]) {
     for (let i = 0; i < result.length; i++) {
       if(result[i].status == 1){
-        result[i].status = "<div class='alert mb-0 alert-success text-center p-2' role='alert'>Ativo</div>"
+        result[i].status = "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-success'><i class='bi bi-check-circle fs-3'></i></a></div>"
       }else{
-        result[i].status = "<div class='alert mb-0 alert-danger text-center p-2' role='alert'>Inativo</div>"
+        result[i].status = "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-danger'><i class='bi bi-x-circle fs-3'></i></a></div>"
       };
     }
   }

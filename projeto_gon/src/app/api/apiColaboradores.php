@@ -11,7 +11,7 @@ include("connection.php");
 if ($method == "GET") {
     if (!isset($_GET["id_colaborador"]) && !isset($_GET["cpf_cnpj"])) {
         try {
-            $sql = "SELECT * FROM `colaboradores` ORDER by STATUS desc";
+            $sql = "SELECT id_colaborador,nome,cpf_cnpj,telefone,status FROM `colaboradores` ORDER by STATUS desc";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute();

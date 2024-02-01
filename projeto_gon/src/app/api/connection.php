@@ -1,4 +1,4 @@
-<?php
+<?php  
 
     $host = "localhost";            // host onde está o banco de dados
     $db_name = "bd_proj_gon";      // nome do banco de dados
