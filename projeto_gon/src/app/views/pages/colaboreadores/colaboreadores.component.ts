@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/ApiService';
 import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
 import { ModalColaboradoresComponent } from '../../modal/modal-colaboradores/modal-colaboradores.component';
 
-import { ServicosComponent } from '../servicos/servicos.component';
+import { ModalRlColaboradoresServicosComponent } from '../../modal/modal-rl-colaboradores-servicos/modal-rl-colaboradores-servicos.component';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class BtnServicosComponent implements OnInit {
   }
 
   onSetor() {
-    this._dialogService.open(ServicosComponent, {
+    this._dialogService.open(ModalRlColaboradoresServicosComponent, {
       context: {
         id_colaborador: this.rowData.id_colaborador,
       },
@@ -170,7 +170,7 @@ export class ColaboreadoresComponent {
       },
       closeOnEsc: true,
       hasBackdrop: true,
-      closeOnBackdropClick: false,
+      closeOnBackdropClick: true,
       hasScroll: true
     })
       .onClose.subscribe(update => update && this.getDados()

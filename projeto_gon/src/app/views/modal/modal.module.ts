@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NbAutocompleteModule, NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbListModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbToggleModule } from '@nebular/theme';
+import { NbAutocompleteModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbListModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbToggleModule } from '@nebular/theme';
 
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Angular2SmartTableModule } from 'angular2-smart-table';
@@ -10,6 +10,7 @@ import { ModalClientesComponent } from './modal-clientes/modal-clientes.componen
 import { ModalColaboradoresComponent } from './modal-colaboradores/modal-colaboradores.component';
 import { ModalServicosComponent } from './modal-servicos/modal-servicos.component';
 import { ModalLocaisComponent } from './modal-locais/modal-locais.component';
+import { ModalRlColaboradoresServicosComponent } from './modal-rl-colaboradores-servicos/modal-rl-colaboradores-servicos.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ModalLocaisComponent } from './modal-locais/modal-locais.component';
     ModalColaboradoresComponent,
     ModalServicosComponent,
     ModalLocaisComponent,
+    ModalRlColaboradoresServicosComponent,
   ],
   imports: [
     Angular2SmartTableModule,
@@ -25,6 +27,7 @@ import { ModalLocaisComponent } from './modal-locais/modal-locais.component';
     CommonModule,
     NbAutocompleteModule,
     NbButtonModule,
+    NbButtonGroupModule,
     NbCardModule,
     NbFormFieldModule,
     NbIconModule,

@@ -75,6 +75,7 @@ export class ModalServicosComponent {
     let dados = {
       form: this.formulario.value,
     };
+    
     if (this.metodo == 'POST') {
       this._provider.postAPI(dados, this.api).subscribe(
         (data: any) => {
