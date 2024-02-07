@@ -1,0 +1,213 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 07/02/2024 às 18:27
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `bd_proj_gon`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `id_cliente` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `cep` varchar(9) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `genero` varchar(50) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `cpf` varchar(15) NOT NULL,
+  `foto` int(50) NOT NULL,
+  `status` int(1) NOT NULL,
+  `logradouro` char(100) NOT NULL,
+  `numero` int(255) NOT NULL,
+  `complemento` char(100) NOT NULL,
+  `bairro` text NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `uf` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `nome`, `cep`, `telefone`, `genero`, `data_nascimento`, `cpf`, `foto`, `status`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `uf`) VALUES
+(1, 'MARCOS VINICIUS BARBOSA 02', '12071-839', '(12)98196-6901', 'M', '1996-12-23', '44682975811', 0, 1, 'Rua João Gonçalves dos Santos', 14, 'casa', 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'SP'),
+(4, 'MARCOS VINICIUS BARBOSA 01', '12071-839', '(12)98196-6901', 'M', '1996-12-23', '44682975812', 0, 1, 'Rua João Gonçalves dos Santos', 14, 'casa', 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'SP'),
+(5, 'MARCOS VINICIUS BARBOSA 02', '12071839', '1121651681', 'M', '0000-00-00', '51516515621', 0, 0, 'Rua João Gonçalves dos Santos', 14, 'casa', 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'SP'),
+(6, 'MARCOS VINICIUS BARBOSA 07', '', '1111111111', 'M', '0000-00-00', '15165165165', 0, 1, '', 0, '', '', '', ''),
+(7, 'MARCOS VINICIUS BARBOSA 06', '', '1651651891', 'M', '0000-00-00', '15616161651', 0, 1, '', 0, '', '', '', ''),
+(8, 'MARCOS VINICIUS BARBOSA 05', '', '1651651891', 'M', '0000-00-00', '15616161651', 0, 0, '', 0, '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `colaboradores`
+--
+
+CREATE TABLE `colaboradores` (
+  `id_colaborador` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `cpf_cnpj` varchar(18) NOT NULL,
+  `tipo` int(1) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `cep` varchar(9) NOT NULL,
+  `logradouro` varchar(100) NOT NULL,
+  `numero` int(255) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `complemento` text NOT NULL,
+  `data_cadastro` varchar(10) NOT NULL,
+  `foto` varchar(50) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `colaboradores`
+--
+
+INSERT INTO `colaboradores` (`id_colaborador`, `nome`, `cpf_cnpj`, `tipo`, `telefone`, `cep`, `logradouro`, `numero`, `bairro`, `cidade`, `complemento`, `data_cadastro`, `foto`, `uf`, `status`) VALUES
+(1, 'marcos vinicius barbosa  01', '44682975811', 0, '1298941614', '12071839', 'Rua João Gonçalves dos Santos', 14, 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'casa', '2024-01-30', '', 'SP', 0),
+(2, 'marcos', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
+(3, 'marcos vinicius barbosa 02', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
+(4, 'marcos vinicius barbosa 03', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
+(5, 'marcos vinicius barbosa 03', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
+(6, 'marcos vinicius barbosa 04', '23315315631', 0, '1265165165', '', '', 0, '', '', '', '2024-01-30', '', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `rl_colaborador_servico`
+--
+
+CREATE TABLE `rl_colaborador_servico` (
+  `id_relacao` int(11) NOT NULL,
+  `id_colaborador` int(11) NOT NULL,
+  `id_servico` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `rl_colaborador_servico`
+--
+
+INSERT INTO `rl_colaborador_servico` (`id_relacao`, `id_colaborador`, `id_servico`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 3),
+(4, 2, 4),
+(5, 2, 4),
+(6, 2, 6),
+(7, 2, 7),
+(8, 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `servicos`
+--
+
+CREATE TABLE `servicos` (
+  `id_servico` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `descricao` text NOT NULL,
+  `tempo` int(2) NOT NULL,
+  `valor` decimal(7,2) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `servicos`
+--
+
+INSERT INTO `servicos` (`id_servico`, `nome`, `descricao`, `tempo`, `valor`, `status`) VALUES
+(1, 'Undercut', 'O undercut é aquele corte com volume no topo da cabeça e completamente raspado na nuca e laterais.', 10, 190.00, 1),
+(2, 'Americano', 'A tendência do momento é o corte americano, que nada mais é do que a variação de um corte baixo masculino clássico, o militar. A diferença está nas possibilidades: alto, médio, baixo ou disfarçado, as opções são as mais diversas para quem quer estar hype sem perder a versatilidade.', 30, 25.00, 0),
+(3, 'fade', 'o corte degradê, que também é conhecido como fade, ganhou a atenção dos homens que buscam um visual moderno. Para chegar nesse estilo de cabelo curto masculino, as laterais devem ser raspadas ou mais baixas que o topo da cabeça, formando justamente o efeito de degradê.', 30, 30.00, 0),
+(4, 'Jaca', 'Cabelo na régua e sombreado perfeito são as melhores características para descrever o corte do jaca. Democrático, ele combina com todos os tipos de cabelo e ainda pode receber estilizações, como riscos, desenhos e reflexos alinhados.', 30, 25.00, 0),
+(5, 'Repicado', 'Para quem quer deixar os fios curtos, mas nem tanto, sugerimos que faça um dos cortes de cabelo masculino curto repicado na tesoura. Isso vai ajudar a deixar os visual leve e com movimento.', 30, 30.00, 0),
+(6, 'Militar', 'ambém conhecido como ‘crew cut’, o corte militar é outra opção de cortes de cabelo curto masculino certeira para quem busca um curtinho prático para o dia a dia. O estilo recebe esse nome porque foi popularizado pelos soldados americanos nos anos 30. Não há como negar que é um charme!', 25, 20.00, 0),
+(7, 'Caesar', 'O corte caesar é perfeito para quem quer começar a disfarçar os sinais da calvície. Ele é marcado por uma lateral geométrica e uma franjinha reta e curtinha.', 20, 15.00, 0),
+(8, 'Nudred', 'Embora seja uma texturização, esse estilo de cabelo pode ser perfeito para quem tem fios curtos crespos ou afro. Será necessária uma esponja específica com furos para criar os “falsos dreads“', 30, 25.00, 1),
+(9, 'Social', 'Esse cabelo curto masculino é o corte tradicional e clássico que muitos homens adoram. A maior vantagem é a praticidade na hora de cuidar dos fios, porém será preciso ir mais vezes à barbearia para fazer a manutenção.', 30, 25.00, 1),
+(10, 'Moicano', 'Ousado na medida: esse é o famoso moicano disfarçado! O corte combina com os cabelos lisos, sendo as laterais mais baixas ou, então, raspadas, mantendo o topo levantado. Para isso, é essencial investir em um bom finalizador.', 30, 25.00, 1),
+(11, 'Buzzcut', 'Para quem busca praticidade do dia a dia e não tem paciência para dedicar tempo para estilizar os fios, o buzz cut – ou corte raspado – é ótima opção de corte de cabelo curto masculino! Só não se esqueça de usar o protetor solar para evitar danos ao couro cabeludo que fica exposto', 30, 25.00, 1);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id_cliente`);
+
+--
+-- Índices de tabela `colaboradores`
+--
+ALTER TABLE `colaboradores`
+  ADD PRIMARY KEY (`id_colaborador`);
+
+--
+-- Índices de tabela `rl_colaborador_servico`
+--
+ALTER TABLE `rl_colaborador_servico`
+  ADD PRIMARY KEY (`id_relacao`);
+
+--
+-- Índices de tabela `servicos`
+--
+ALTER TABLE `servicos`
+  ADD PRIMARY KEY (`id_servico`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `colaboradores`
+--
+ALTER TABLE `colaboradores`
+  MODIFY `id_colaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `rl_colaborador_servico`
+--
+ALTER TABLE `rl_colaborador_servico`
+  MODIFY `id_relacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `servicos`
+--
+ALTER TABLE `servicos`
+  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
