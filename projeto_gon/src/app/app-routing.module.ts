@@ -9,6 +9,7 @@ import { ServicosComponent } from './views/pages/servicos/servicos.component';
 import { AgendasComponent } from './views/pages/agendas/agendas.component';
 import { FinanceiroComponent } from './views/pages/financeiro/financeiro.component';
 import { ConfiguracoesComponent } from './views/pages/configuracoes/configuracoes.component';
+import { ModalRlColabServFormComponent } from './views/modal/modal-rl-colab-serv-form/modal-rl-colab-serv-form.component';
 
 const routes: Routes = [
   {

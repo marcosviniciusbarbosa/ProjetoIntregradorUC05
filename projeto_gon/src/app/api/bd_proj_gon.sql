@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/02/2024 às 18:27
+-- Tempo de geração: 31/01/2024 às 11:58
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -86,38 +86,12 @@ CREATE TABLE `colaboradores` (
 --
 
 INSERT INTO `colaboradores` (`id_colaborador`, `nome`, `cpf_cnpj`, `tipo`, `telefone`, `cep`, `logradouro`, `numero`, `bairro`, `cidade`, `complemento`, `data_cadastro`, `foto`, `uf`, `status`) VALUES
-(1, 'marcos vinicius barbosa  01', '44682975811', 0, '1298941614', '12071839', 'Rua João Gonçalves dos Santos', 14, 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'casa', '2024-01-30', '', 'SP', 0),
-(2, 'marcos', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
+(1, 'marcos vinicius barbosa  01', '44682975811', 0, '1298941614', '12071839', 'Rua João Gonçalves dos Santos', 14, 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'casa', '2024-01-30', '', 'SP', 1),
+(2, 'marcos', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 0),
 (3, 'marcos vinicius barbosa 02', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
 (4, 'marcos vinicius barbosa 03', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
 (5, 'marcos vinicius barbosa 03', '15616516516', 0, '1216516516', '', '', 0, '', '', '', '2024-01-30', '', '', 1),
 (6, 'marcos vinicius barbosa 04', '23315315631', 0, '1265165165', '', '', 0, '', '', '', '2024-01-30', '', '', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `rl_colaborador_servico`
---
-
-CREATE TABLE `rl_colaborador_servico` (
-  `id_relacao` int(11) NOT NULL,
-  `id_colaborador` int(11) NOT NULL,
-  `id_servico` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `rl_colaborador_servico`
---
-
-INSERT INTO `rl_colaborador_servico` (`id_relacao`, `id_colaborador`, `id_servico`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 3),
-(4, 2, 4),
-(5, 2, 4),
-(6, 2, 6),
-(7, 2, 7),
-(8, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -168,12 +142,6 @@ ALTER TABLE `colaboradores`
   ADD PRIMARY KEY (`id_colaborador`);
 
 --
--- Índices de tabela `rl_colaborador_servico`
---
-ALTER TABLE `rl_colaborador_servico`
-  ADD PRIMARY KEY (`id_relacao`);
-
---
 -- Índices de tabela `servicos`
 --
 ALTER TABLE `servicos`
@@ -194,12 +162,6 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `colaboradores`
   MODIFY `id_colaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de tabela `rl_colaborador_servico`
---
-ALTER TABLE `rl_colaborador_servico`
-  MODIFY `id_relacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`

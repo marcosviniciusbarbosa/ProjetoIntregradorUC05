@@ -3,6 +3,7 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { LocalDataSource } from 'angular2-smart-table';
 import { IColumnType, Settings } from 'angular2-smart-table';
 import { ApiService } from 'src/app/services/ApiService';
+import { ModalRlColabServFormComponent } from '../modal-rl-colab-serv-form/modal-rl-colab-serv-form.component';
 
 @Component({
   selector: 'app-modal-rl-colaboradores-servicos',
@@ -128,7 +129,7 @@ export class ModalRlColaboradoresServicosComponent {
 
   showDialog(id: number, metodo: string) {
     this._dialogService
-      .open(ModalRlColaboradoresServicosComponent, {
+      .open(ModalRlColabServFormComponent, {
         context: {
           id: id,
           metodo: metodo,

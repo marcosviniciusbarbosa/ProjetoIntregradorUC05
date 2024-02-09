@@ -135,7 +135,7 @@ export class ServicosComponent {
         },
         closeOnEsc: true,
         hasBackdrop: true,
-        closeOnBackdropClick: false,
+        closeOnBackdropClick: true,
         hasScroll: true,
       })
       .onClose.subscribe((update) => update && this.getDados(0));

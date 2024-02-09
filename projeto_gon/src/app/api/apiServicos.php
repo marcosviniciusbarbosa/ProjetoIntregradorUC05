@@ -60,6 +60,36 @@ if ($method == "GET") {
             $conn = null;
             echo json_encode($result);
         }
+    } elseif (isset($_GET["id_colaborador"])) {
+        try {
+            if ((empty($_GET["id_colaborador"]) || !is_numeric($_GET["id_colaborador"]))) {
+                // está vazio ou não é numérico : ERRO
+                throw new ErrorException("Valor inválido 1", 1);
+            }
+            $id_colaborador = $_GET["id_colaborador"];
+
+            $sql = "SELECT * FROM servicos
+                    WHERE id_servico =:id_servico";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":id_colaborador", $id_colaborador);
+
+            $stmt->execute();
+
+            $dado = $stmt->fetch(PDO::FETCH_OBJ);
+            $result['result'] = $dado;
+            $result["status"] = "success";
+
+        } catch (PDOException $ex) {
+            $result = ["status" => "fail", "error" => $ex->getMEssage()];
+            http_response_code(200);
+        } catch (Exception $ex) {
+            $result = ["status" => "fail", "error" => $ex->getMEssage()];
+            http_response_code(200);
+        } finally {
+            $conn = null;
+            echo json_encode($result);
+        }
     }
 } elseif ($method == "POST") {
     // recupera dados do corpo (body) de uma requisão POST

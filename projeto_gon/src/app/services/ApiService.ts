@@ -20,6 +20,7 @@ export class ApiService {
     };
 
     const url = this.server + api;
+    console.log(url)
 
     return this.http.get(url, httpOptions).pipe(
       map((res: any) => res),

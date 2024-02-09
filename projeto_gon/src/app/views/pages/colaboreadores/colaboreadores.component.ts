@@ -36,7 +36,7 @@ export class BtnServicosComponent implements OnInit {
       },
       closeOnEsc: true,
       hasBackdrop: true,
-      closeOnBackdropClick: false,
+      closeOnBackdropClick: true,
       hasScroll: true
     });
   }

@@ -64,7 +64,7 @@ export class ClientesComponent implements OnInit {
         type: IColumnType.Html,
       },
     },
-  };  
+  };
 
   constructor(
     private _provider: ApiService,
@@ -73,11 +73,11 @@ export class ClientesComponent implements OnInit {
     // CARREGAR DADOS NA TABELA
     this.getDados();
   }
-  
+
   getDados() {
     this.loading = true;
     this.source = new LocalDataSource();
-    
+
     let url = 'apiClientes.php';
 
     return this._provider.getAPI(url).subscribe(data => {
@@ -107,9 +107,9 @@ export class ClientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
-  
+
 
   onOptions(event: any) {
 
@@ -128,7 +128,7 @@ export class ClientesComponent implements OnInit {
       },
       closeOnEsc: true,
       hasBackdrop: true,
-      closeOnBackdropClick: false,
+      closeOnBackdropClick: true,
       hasScroll: true
     })
       .onClose.subscribe(update => update && this.getDados()
