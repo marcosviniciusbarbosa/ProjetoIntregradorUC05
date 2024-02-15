@@ -15,10 +15,16 @@ if ($method == "GET") {
         try {
 
             $id_colaborador = $_GET["id_colaborador"];
+            $filtro = $_REQUEST['filtro'];
 
-            $sql = "SELECT rlcs.id_relacao, s.nome, concat(s.tempo,' min') as temp_format, concat('R$ ',s.valor) as val_format FROM `rl_colaborador_servico` rlcs JOIN servicos s ON s.id_servico = rlcs.id_servico where id_colaborador = $id_colaborador  ORDER by s.STATUS desc";
+            if ($filtro == 1) {
+                $sql = "SELECT s.id_servico, s.nome FROM servicos s WHERE s.id_servico NOT IN ( SELECT rlcs.id_servico FROM rl_colaborador_servico rlcs JOIN servicos s ON s.id_servico = rlcs.id_servico WHERE id_colaborador = :id_colaborador) ORDER BY s.STATUS DESC";
+            } else {
+                $sql = "SELECT rlcs.id_relacao, s.nome, concat(s.tempo,' min') as temp_format, concat('R$ ',s.valor) as val_format FROM `rl_colaborador_servico` rlcs JOIN servicos s ON s.id_servico = rlcs.id_servico where id_colaborador = :id_colaborador  ORDER by s.STATUS desc";
+            }
 
             $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":id_colaborador", $id_colaborador);
             $stmt->execute();
 
             $dados = $stmt->fetchall(PDO::FETCH_OBJ);
@@ -43,28 +49,26 @@ if ($method == "GET") {
     $dados = $postjson['form'];
 
     // função trim retira espaços que estão sobrando
-    $nome = trim($dados['nome']); // acessa valor de um OBJETO
-    $valor = trim($dados['valor']); // acessa valor de um OBJETO
-    $tempo = trim($dados['tempo']); // acessa valor de um OBJETO
-    $descricao = trim($dados['descricao']); // acessa valor de um OBJETO
+    $id_servico = trim($dados['id_servico']); // acessa valor de um OBJETO
+    $id_colaborador = trim($dados['id_colaborador']); // acessa valor de um OBJETO
     $status = trim($dados['status']); // acessa valor de um OBJETO
 
     try {
-        if (empty($nome) || empty($valor) || empty($descricao) || empty($status)) {
+        if (empty($id_servico) || empty($id_colaborador) || !is_numeric($id_servico) || !is_numeric($id_colaborador)) {
             // está vazio  : ERRO
             throw new ErrorException("Campo não preenchido!", 1);
         }
-        $sql = "INSERT INTO servicos (nome, valor, tempo,descricao, status) VALUES (:nome,:valor,:tempo,:descricao,:status)";
+
+        $sql = "INSERT INTO rl_colaborador_servico (id_colaborador, id_servico, status) VALUES (:id_colaborador,:id_servico,:status)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":nome", $nome);
-        $stmt->bindParam(":valor", $valor);
-        $stmt->bindParam(":descricao", $descricao);
+        $stmt->bindParam(":id_colaborador", $id_colaborador);
+        $stmt->bindParam(":id_servico", $id_servico);
         $stmt->bindParam(":status", $status);
-        $stmt->bindParam(":tempo", $tempo);
         $stmt->execute();
 
-        $result = array("status" => "success");
+        $result = ["status" => "success", "error" => "Registro realizado com sucesso"];
+
     } catch (PDOException $ex) {
         $result = ["status" => "fail", "error" => $ex->getMEssage()];
         http_response_code(200);

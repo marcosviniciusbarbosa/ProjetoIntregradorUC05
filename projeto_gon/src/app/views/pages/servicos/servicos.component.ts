@@ -74,19 +74,14 @@ export class ServicosComponent {
   ) {}
   ngOnInit(): void {
     // CARREGAR DADOS NA TABELA
-    this.getDados(this.id_colaborador);
+    this.getDados();
   }
 
-  getDados(id: any) {
-    console.log(id);
+  getDados() {
     this.loading = true;
     this.source = new LocalDataSource();
 
-    var url = 'apiServicos.php';
-
-    if (id > 0) {
-      url = 'apiRelacaoColaboradorServico.php?id_colaborador=' + id;
-    }
+    let url = 'apiServicos.php';
 
     return this._provider.getAPI(url).subscribe(
       (data) => {
@@ -138,6 +133,6 @@ export class ServicosComponent {
         closeOnBackdropClick: true,
         hasScroll: true,
       })
-      .onClose.subscribe((update) => update && this.getDados(0));
+      .onClose.subscribe((update) => update && this.getDados());
   }
 }

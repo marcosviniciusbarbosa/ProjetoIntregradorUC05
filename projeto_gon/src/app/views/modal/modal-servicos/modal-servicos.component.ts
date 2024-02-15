@@ -37,11 +37,11 @@ export class ModalServicosComponent {
   ngOnInit(): void {
     // CARREGA CADASTRO
     if (this.id > 0) {
-      this.getServicos(this.id);
+      this.getDados(this.id);
     }
   }
 
-  getServicos(id: number) {
+  getDados(id: number) {
     this.loading = true;
 
     let url = this.api + '?id_servico=' + id;
@@ -75,7 +75,7 @@ export class ModalServicosComponent {
     let dados = {
       form: this.formulario.value,
     };
-    
+  
     if (this.metodo == 'POST') {
       this._provider.postAPI(dados, this.api).subscribe(
         (data: any) => {

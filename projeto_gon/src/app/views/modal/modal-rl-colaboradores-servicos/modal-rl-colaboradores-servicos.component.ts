@@ -15,6 +15,8 @@ export class ModalRlColaboradoresServicosComponent {
   @Input() id_colaborador: number | undefined;
   @Input() id: number = 0;
   @Input() metodo: string = 'POST';
+  
+  private api: string = 'apiRelacaoColaboradorServico.php';
 
   public source: LocalDataSource = new LocalDataSource();
   public loading: boolean = true;
@@ -46,11 +48,11 @@ export class ModalRlColaboradoresServicosComponent {
     columns: {
       nome: {
         title: 'NOME',
-        width: '50%',
+        width: '45%',
         sortDirection: 'asc',
       },
       temp_format: {
-        title: 'TEMPO MIN',
+        title: 'MINUTOS',
         classContent: 'text-center',
       },
       val_format: {
@@ -79,9 +81,10 @@ export class ModalRlColaboradoresServicosComponent {
   }
 
   onOptions(event: any) {
+    // console.log(event);
     if (event.action == 'edit') {
       // OPÇÃO PARA EDITAR
-      this.showDialog(event.data.id_servico, 'PUT');
+      this.showDialog('PUT');
     }
   }
 
@@ -97,15 +100,14 @@ export class ModalRlColaboradoresServicosComponent {
     }
   }
 
-  getDados(id: any) {
-    console.log(id);
+  getDados(id_colaborador: any) {
     this.loading = true;
     this.source = new LocalDataSource();
 
-    var url = 'apiServicos.php';
+    var url = this.api;
 
-    if (id > 0) {
-      url = 'apiRelacaoColaboradorServico.php?id_colaborador=' + id;
+    if (id_colaborador > 0) {
+      url = this.api + '?id_colaborador=' + id_colaborador + '&filtro=0';
     }
 
     return this._provider.getAPI(url).subscribe(
@@ -126,12 +128,13 @@ export class ModalRlColaboradoresServicosComponent {
       }
     );
   }
+  
 
-  showDialog(id: number, metodo: string) {
+  showDialog(metodo: string) {
     this._dialogService
       .open(ModalRlColabServFormComponent, {
         context: {
-          id: id,
+          id_colaborador: this.id_colaborador,
           metodo: metodo,
         },
         closeOnEsc: true,

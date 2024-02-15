@@ -8,10 +8,9 @@ import { ModalServicosComponent } from '../modal-servicos/modal-servicos.compone
 @Component({
   selector: 'app-modal-rl-colab-serv-form',
   templateUrl: './modal-rl-colab-serv-form.component.html',
-  styleUrls: ['./modal-rl-colab-serv-form.component.scss']
+  styleUrls: ['./modal-rl-colab-serv-form.component.scss'],
 })
 export class ModalRlColabServFormComponent {
-
   constructor(
     private _provider: ApiService,
     private _dialogService: NbDialogService,
@@ -23,78 +22,90 @@ export class ModalRlColabServFormComponent {
   @Input() id: number = 0;
   @Input() metodo: string = 'POST';
 
-  private api: string = 'apiServicos.php';
+  private result: string = '';
+  private msg: string = '';
+
+  private api: string = 'apiRelacaoColaboradorServico.php';
 
   public formulario: FormGroup = this._formBuilder.group({
-    servico: [null,[Validators.required]]
-    });
+    servico: [null, [Validators.required]],
+  });
+
   public source: LocalDataSource = new LocalDataSource();
   public loading: boolean = true;
-  public comboServicos: any [] = []
+  public comboServicos: any[] = [];
 
   selectedItem: any;
 
   ngOnInit(): void {
-    // CARREGAR DADOS NA TABELA
-    this.getServicos(this.id_colaborador);
+    // CARREGAR INFORMAÇÕES
+    this.getDados(this.id_colaborador);
   }
 
-  getDados(id: any) {
-    console.log(id);
-    this.loading = true;
-    this.source = new LocalDataSource();
-
-    var url = 'apiServicos.php';
-
-    if (id > 0) {
-      url = 'apiRelacaoColaboradorServico.php?id_colaborador=' + id;
-    }
-
-    return this._provider.getAPI(url).subscribe(
-      (data) => {
-        // CARREGAR DADOS NA TABELA
-        if (data['status'] === 'success') {
-          this.status(data['result']);
-          this.source.load(data['result']);
-        } else {
-          this.loading = false;
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-      () => {
-        this.loading = false;
-      }
-    );
-  }
-
+  //ENVIA DADOS VIA API PARA BANCO - INICIO
   onSubmit() {
-    throw new Error('Method not implemented.');
-  }
-
-  status(result: any[]) {
-    for (let i = 0; i < result.length; i++) {
-      if (result[i].status == 1) {
-        result[i].status =
-          "<div class='alert mb-0 alert-success text-center p-2' role='alert'>Ativo</div>";
-      } else {
-        result[i].status =
-          "<div class='alert mb-0 alert-danger text-center p-2' role='alert'>Inativo</div>";
-      }
-    }
-  }
-
-  getServicos(id_colaborador: any) {
     this.loading = true;
 
-    let url = this.api + '?id_colaborador=' + id_colaborador;
+    let dados = this.formulario.value;
+
+    if (this.metodo == 'POST') {
+      dados.servico.forEach((element: any) => {
+        let dado = {
+          form: {
+            id_servico: element,
+            id_colaborador: this.id_colaborador,
+            status: 1,
+          },
+        };
+        this._provider.postAPI(dado, this.api).subscribe(
+          (data: any) => {
+            if (data['status'] == 'success') {
+              this._provider.showToast('OBA!', data['error'], 'success');
+            } else {
+              this._provider.showToast('OPS!', data['error'], 'danger');
+            }
+          },
+          (error: any) => {
+            this.loading = false;
+          }
+        );
+      });
+      this.loading = false;
+      this._dialogRef.close();
+    } else {
+      dados = {
+        form: this.formulario.value,
+      };
+      this._provider.postAPI(dados, this.api).subscribe(
+        (data: any) => {
+          if (data['status'] == 'success') {
+            this._provider.showToast('OBA!', data['error'], 'success');
+          } else {
+            this._provider.showToast('OPS!', data['error'], 'danger');
+          }
+        },
+        (error: any) => {
+          this.loading = false;
+        },
+        () => {
+          this.loading = false;
+          this._dialogRef.close('update');
+        }
+      );
+    }
+  }
+  //ENVIA DADOS VIA API PARA BANCO - FIM
+
+  getDados(id_colaborador: any) {
+    this.loading = true;
+
+    let url = this.api + '?id_colaborador=' + id_colaborador + '&filtro=1';
 
     return this._provider.getAPI(url).subscribe(
       (data: any) => {
         if (data['status'] == 'success') {
           data['result'].forEach((element: any) => {
-            this.comboServicos.push(element)
+            this.comboServicos.push(element);
           });
         }
       },
@@ -106,9 +117,8 @@ export class ModalRlColabServFormComponent {
       }
     );
   }
-
+  
   close() {
     this._dialogRef.close();
   }
-
 }

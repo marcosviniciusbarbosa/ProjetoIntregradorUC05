@@ -63,7 +63,7 @@ if ($method == "GET") {
             $result['result'] = $dado;
             $result["status"] = "success";
             $result["where"] = true;
-            $result["sql"] = $sql;
+            // $result["sql"] = $sql;
         } catch (PDOException $ex) {
             $result = ["status" => "fail", "error" => $ex->getMEssage()];
             http_response_code(200);
