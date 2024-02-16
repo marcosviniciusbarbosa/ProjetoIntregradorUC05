@@ -4,6 +4,7 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
 import { ApiService } from 'src/app/services/ApiService';
 import { ModalServicosComponent } from '../modal-servicos/modal-servicos.component';
+import { ModalRlColaboradoresServicosComponent } from '../modal-rl-colaboradores-servicos/modal-rl-colaboradores-servicos.component';
 
 @Component({
   selector: 'app-modal-rl-colab-serv-form',
@@ -13,6 +14,7 @@ import { ModalServicosComponent } from '../modal-servicos/modal-servicos.compone
 export class ModalRlColabServFormComponent {
   constructor(
     private _provider: ApiService,
+    private _ModalRlColaboradoresServicosComponent: ModalRlColaboradoresServicosComponent,
     private _dialogService: NbDialogService,
     private _dialogRef: NbDialogRef<ModalServicosComponent>,
     private _formBuilder: FormBuilder
@@ -71,7 +73,7 @@ export class ModalRlColabServFormComponent {
         );
       });
       this.loading = false;
-      this._dialogRef.close();
+      this._ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
     } else {
       dados = {
         form: this.formulario.value,
@@ -89,7 +91,7 @@ export class ModalRlColabServFormComponent {
         },
         () => {
           this.loading = false;
-          this._dialogRef.close('update');
+          this._ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
         }
       );
     }
