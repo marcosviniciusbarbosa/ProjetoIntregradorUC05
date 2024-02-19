@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/ApiService';
   styleUrls: ['./modal-colaboradores.component.scss'],
 })
 export class ModalColaboradoresComponent {
+  
   @Input() id: number = 0;
   metodo: string = 'POST';
 

@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
-import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
+import { LocalDataSource } from 'angular2-smart-table';
 import { ApiService } from 'src/app/services/ApiService';
 import { ModalServicosComponent } from '../modal-servicos/modal-servicos.component';
-import { ModalRlColaboradoresServicosComponent } from '../modal-rl-colaboradores-servicos/modal-rl-colaboradores-servicos.component';
 
 @Component({
   selector: 'app-modal-rl-colab-serv-form',
@@ -14,7 +13,6 @@ import { ModalRlColaboradoresServicosComponent } from '../modal-rl-colaboradores
 export class ModalRlColabServFormComponent {
   constructor(
     private _provider: ApiService,
-    private _ModalRlColaboradoresServicosComponent: ModalRlColaboradoresServicosComponent,
     private _dialogService: NbDialogService,
     private _dialogRef: NbDialogRef<ModalServicosComponent>,
     private _formBuilder: FormBuilder
@@ -23,9 +21,6 @@ export class ModalRlColabServFormComponent {
   @Input() id_colaborador: number | undefined;
   @Input() id: number = 0;
   @Input() metodo: string = 'POST';
-
-  private result: string = '';
-  private msg: string = '';
 
   private api: string = 'apiRelacaoColaboradorServico.php';
 
@@ -73,7 +68,8 @@ export class ModalRlColabServFormComponent {
         );
       });
       this.loading = false;
-      this._ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
+      close();
+      // ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
     } else {
       dados = {
         form: this.formulario.value,
@@ -91,7 +87,8 @@ export class ModalRlColabServFormComponent {
         },
         () => {
           this.loading = false;
-          this._ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
+          close();
+          // ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
         }
       );
     }
@@ -119,7 +116,7 @@ export class ModalRlColabServFormComponent {
       }
     );
   }
-  
+
   close() {
     this._dialogRef.close();
   }

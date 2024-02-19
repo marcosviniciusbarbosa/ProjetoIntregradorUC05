@@ -20,6 +20,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ModalModule } from './views/modal/modal.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

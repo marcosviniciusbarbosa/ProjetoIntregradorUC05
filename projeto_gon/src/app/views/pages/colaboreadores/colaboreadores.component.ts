@@ -13,7 +13,7 @@ import { ModalRlColaboradoresServicosComponent } from '../../modal/modal-rl-cola
 @Component({
   template: `
   <div class="text-center">
-    <a class="d-flex justify-content-center align-items-center" status="info" (click)="onSetor()"><i class="bi bi-list-ul fs-3"></i></a>
+    <a class="d-flex justify-content-center align-items-center" status="info" (click)="onSetor()"><i class="bi bi-person-lines-fill fs-4"></i></a>
   </div>
   `,
   styleUrls: ['./colaboreadores.component.scss']

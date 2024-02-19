@@ -7,14 +7,69 @@ import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
 
 import { ModalLocaisComponent } from '../../modal/modal-locais/modal-locais.component';
 
+import { ModalServicoLocalComponent } from '../../modal/modal-servico-local/modal-servico-local.component';
+import { ModalColaboradorLocalComponent } from '../../modal/modal-colaborador-local/modal-colaborador-local.component';
+
 type NewType = number;
+@Component({
+  template: `
+    <div class="text-center d-flex justify-content-around">
+      <a
+        class="d-flex justify-content-center align-items-center"
+        title="Lista de Colaboradores"
+        status="info"
+        (click)="onColaboradores()"
+        ><i class="bi bi-people-fill fs-4"></i
+      ></a>
+      <a
+        class="d-flex justify-content-center align-items-center"
+        title="Lista de Serviços"
+        status="info"
+        (click)="onServicos()"
+        ><i class="bi bi-card-list fs-4"></i
+      ></a>
+    </div>
+  `,
+  styleUrls: ['./locais.component.scss'],
+})
+export class BtnServicosColaboradoresComponent implements OnInit {
+
+  @Input() rowData: any;
+
+  constructor(private _dialogService: NbDialogService) {}
+
+  ngOnInit() {}
+
+  onColaboradores() {
+    this._dialogService.open(ModalColaboradorLocalComponent, {
+      context: {
+        id_local: this.rowData.id_local,
+      },
+      closeOnEsc: true,
+      hasBackdrop: true,
+      closeOnBackdropClick: true,
+      hasScroll: true,
+    });
+  }
+
+  onServicos() {
+    this._dialogService.open(ModalServicoLocalComponent, {
+      context: {
+        id_local: this.rowData.id_local,
+      },
+      closeOnEsc: true,
+      hasBackdrop: true,
+      closeOnBackdropClick: true,
+      hasScroll: true,
+    });
+  }
+}
 
 @Component({
   selector: 'app-locais',
   templateUrl: './locais.component.html',
-  styleUrls: ['./locais.component.scss']
+  styleUrls: ['./locais.component.scss'],
 })
-
 export class LocaisComponent {
   public source: LocalDataSource = new LocalDataSource();
   public loading: boolean = true;
@@ -24,11 +79,11 @@ export class LocaisComponent {
     noDataMessage: 'Nenhum registro foi encontrado.',
     pager: {
       perPage: 5,
-      perPageSelect: [5, 10, 20, 40,80,160],
+      perPageSelect: [5, 10, 20, 40, 80, 160],
       perPageSelectLabel: 'Total: ',
     },
     add: {
-      addButtonContent: '<i class="bi bi-plus"></i>',
+      addButtonContent: '<i class="bi bi-plus-square fs-5"></i>',
     },
     actions: {
       columnTitle: '',
@@ -38,31 +93,32 @@ export class LocaisComponent {
       custom: [
         {
           name: 'edit',
-          title: '<i class="bi bi-pencil mb-2"></i>',
+          title:
+            '<div class="text-center"><i class="bi bi-pencil-square"></i></div>',
         },
       ],
     },
     columns: {
       nome: {
         title: 'NOME',
+        width: '80%',
         sortDirection: 'asc',
       },
-      cpf: {
-        title: 'CPF',
-        classContent: 'text-center',
-      },
-      telefone: {
-        title: 'TELEFONE',
-        classContent: 'text-center',
+      colaboradores: {
+        type: IColumnType.Custom,
+        width: '10%',
+        renderComponent: BtnServicosColaboradoresComponent,
+        isFilterable: false,
+        isSortable: false,
       },
       status: {
         title: 'STATUS',
-        width: '50px',
+        width: '10%',
         sortDirection: 'desc',
         type: IColumnType.Html,
       },
     },
-  };  
+  };
 
   constructor(
     private _provider: ApiService,
@@ -71,14 +127,15 @@ export class LocaisComponent {
     // CARREGAR DADOS NA TABELA
     this.getDados();
   }
-  
+
   getDados() {
     this.loading = true;
     this.source = new LocalDataSource();
-    
-    let url = 'lista_clientes.php';
 
-    return this._provider.getAPI(url).subscribe(data => {
+    let url = 'apiLocalAtividade.php';
+
+    return this._provider.getAPI(url).subscribe(
+      (data) => {
         // CARREGAR DADOS NA TABELA
         if (data['status'] === 'success') {
           this.status(data['result']);
@@ -86,51 +143,49 @@ export class LocaisComponent {
         } else {
           this.loading = false;
         }
-      }, (error: any) => {
+      },
+      (error: any) => {
         this.loading = false;
-      }, () => {
+      },
+      () => {
         this.loading = false;
       }
-      );
+    );
   }
 
   status(result: any[]) {
     for (let i = 0; i < result.length; i++) {
-      if(result[i].status == 1){
-        result[i].status = "<div class='alert mb-0 alert-success text-center p-2' role='alert'>Ativo</div>"
-      }else{
-        result[i].status = "<div class='alert mb-0 alert-danger text-center p-2' role='alert'>Inativo</div>"
-      };
+      if (result[i].status == 1) {
+        result[i].status =
+          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-success'><i class='bi bi-check-circle fs-3'></i></a></div>";
+      } else {
+        result[i].status =
+          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-danger'><i class='bi bi-x-circle fs-3'></i></a></div>";
+      }
     }
   }
 
-  ngOnInit(): void {
-    
-  }
-  
+  ngOnInit(): void {}
 
   onOptions(event: any) {
-
     if (event.action == 'edit') {
       // OPÇÃO PARA EDITAR
-      this.showDialog(event.data.id_cliente,'PUT');
+      this.showDialog(event.data.id_local, 'PUT');
     }
-
   }
 
-  showDialog(id: NewType, metodo: string) {
-    this._dialogService.open(ModalLocaisComponent, {
-      context: {
-        id: id,
-        metodo: metodo,
-      },
-      closeOnEsc: true,
-      hasBackdrop: true,
-      closeOnBackdropClick: false,
-      hasScroll: true
-    })
-      .onClose.subscribe(update => update && this.getDados()
-      );
+  showDialog(id_local: NewType, metodo: string) {
+    this._dialogService
+      .open(ModalLocaisComponent, {
+        context: {
+          id: id_local,
+          metodo: metodo,
+        },
+        closeOnEsc: true,
+        hasBackdrop: true,
+        closeOnBackdropClick: false,
+        hasScroll: true,
+      })
+      .onClose.subscribe((update) => update && this.getDados());
   }
-
 }

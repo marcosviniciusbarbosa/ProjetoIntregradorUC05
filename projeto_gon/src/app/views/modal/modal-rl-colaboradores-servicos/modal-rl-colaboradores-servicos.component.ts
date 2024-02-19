@@ -92,15 +92,15 @@ export class ModalRlColaboradoresServicosComponent {
     for (let i = 0; i < result.length; i++) {
       if (result[i].status == 1) {
         result[i].status =
-          "<div class='alert mb-0 alert-success text-center p-2' role='alert'>Ativo</div>";
+          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-success'><i class='bi bi-check-circle fs-3'></i></a></div>";
       } else {
         result[i].status =
-          "<div class='alert mb-0 alert-danger text-center p-2' role='alert'>Inativo</div>";
+          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-danger'><i class='bi bi-x-circle fs-3'></i></a></div>";
       }
     }
   }
 
-  getDados(id_colaborador: any) {
+  public getDados(id_colaborador: any) {
     this.loading = true;
     this.source = new LocalDataSource();
 
@@ -108,6 +108,8 @@ export class ModalRlColaboradoresServicosComponent {
 
     if (id_colaborador > 0) {
       url = this.api + '?id_colaborador=' + id_colaborador + '&filtro=0';
+    }else{
+      url = this.api + '?id_colaborador=' + this.id_colaborador + '&filtro=0';
     }
 
     return this._provider.getAPI(url).subscribe(
