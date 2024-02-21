@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/02/2024 às 12:18
+-- Tempo de geração: 21/02/2024 às 12:02
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -96,6 +96,38 @@ INSERT INTO `colaboradores` (`id_colaborador`, `nome`, `cpf_cnpj`, `tipo`, `tele
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `local_atividade`
+--
+
+CREATE TABLE `local_atividade` (
+  `id_local` int(11) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `cnpj` varchar(18) NOT NULL,
+  `tipo` int(1) NOT NULL,
+  `cep` varchar(9) NOT NULL,
+  `logradouro` varchar(100) NOT NULL,
+  `numero` int(255) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `complemento` text NOT NULL,
+  `data_cadastro` date NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `local_atividade`
+--
+
+INSERT INTO `local_atividade` (`id_local`, `nome`, `cnpj`, `tipo`, `cep`, `logradouro`, `numero`, `bairro`, `cidade`, `complemento`, `data_cadastro`, `uf`, `status`) VALUES
+(1, 'local1', '11111111111111', 0, '11111111', 'rua1', 1, 'bairro1', 'cidade1', 'complemento1', '2001-01-01', 'sp', 1),
+(2, 'local2', '22222222222222', 0, '22222222', 'rua2', 1, 'bairro2', 'cidade2', 'complemento2', '2002-02-02', 'sp', 0),
+(3, 'local3', '33333333333333', 0, '33333333', 'rua3', 1, 'bairro3', 'cidade3', 'complemento3', '2003-03-03', 'sp', 0),
+(4, 'local4', '44444444444444', 0, '12071839', 'Rua João Gonçalves dos Santos', 14, 'Conjunto Habitacional Humberto Passarelli', 'Taubaté', 'casa', '2024-02-17', 'SP', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `rl_colaborador_servico`
 --
 
@@ -112,15 +144,6 @@ CREATE TABLE `rl_colaborador_servico` (
 
 INSERT INTO `rl_colaborador_servico` (`id_relacao`, `id_colaborador`, `id_servico`, `status`) VALUES
 (1, 1, 1, 1),
-(2, 1, 2, 1),
-(3, 2, 3, 1),
-(4, 2, 4, 1),
-(5, 2, 4, 1),
-(6, 2, 6, 1),
-(7, 2, 7, 1),
-(8, 2, 2, 1),
-(9, 2, 1, 0),
-(10, 2, 1, 0),
 (11, 2, 1, 0),
 (12, 3, 1, 0),
 (13, 4, 9, 0),
@@ -148,7 +171,40 @@ INSERT INTO `rl_colaborador_servico` (`id_relacao`, `id_colaborador`, `id_servic
 (35, 3, 3, 1),
 (36, 5, 10, 1),
 (37, 5, 8, 1),
-(38, 5, 9, 1);
+(38, 5, 9, 1),
+(39, 2, 10, 1),
+(40, 6, 4, 1),
+(41, 6, 2, 1),
+(42, 6, 3, 1),
+(43, 6, 10, 1),
+(47, 2, 5, 1),
+(48, 2, 8, 1),
+(50, 2, 11, 1),
+(52, 2, 9, 1),
+(53, 2, 2, 1),
+(54, 2, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `rl_local_colaborador`
+--
+
+CREATE TABLE `rl_local_colaborador` (
+  `id_relacao` int(11) NOT NULL,
+  `id_colaborador` int(11) NOT NULL,
+  `id_local` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `rl_local_colaborador`
+--
+
+INSERT INTO `rl_local_colaborador` (`id_relacao`, `id_colaborador`, `id_local`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 3, 2),
+(4, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -199,9 +255,21 @@ ALTER TABLE `colaboradores`
   ADD PRIMARY KEY (`id_colaborador`);
 
 --
+-- Índices de tabela `local_atividade`
+--
+ALTER TABLE `local_atividade`
+  ADD PRIMARY KEY (`id_local`);
+
+--
 -- Índices de tabela `rl_colaborador_servico`
 --
 ALTER TABLE `rl_colaborador_servico`
+  ADD PRIMARY KEY (`id_relacao`);
+
+--
+-- Índices de tabela `rl_local_colaborador`
+--
+ALTER TABLE `rl_local_colaborador`
   ADD PRIMARY KEY (`id_relacao`);
 
 --
@@ -227,10 +295,22 @@ ALTER TABLE `colaboradores`
   MODIFY `id_colaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de tabela `local_atividade`
+--
+ALTER TABLE `local_atividade`
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `rl_colaborador_servico`
 --
 ALTER TABLE `rl_colaborador_servico`
-  MODIFY `id_relacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_relacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de tabela `rl_local_colaborador`
+--
+ALTER TABLE `rl_local_colaborador`
+  MODIFY `id_relacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
