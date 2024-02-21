@@ -66,10 +66,9 @@ export class ModalRlColabServFormComponent {
             this.loading = false;
           }
         );
-      });
-      this.loading = false;
-      close();
-      // ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
+      }
+      );
+      this.close()
     } else {
       dados = {
         form: this.formulario.value,
@@ -86,9 +85,7 @@ export class ModalRlColabServFormComponent {
           this.loading = false;
         },
         () => {
-          this.loading = false;
-          close();
-          // ModalRlColaboradoresServicosComponent.getDados(this.id_colaborador);
+          this.close()
         }
       );
     }

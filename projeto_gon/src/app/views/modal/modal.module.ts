@@ -12,8 +12,8 @@ import { ModalServicosComponent } from './modal-servicos/modal-servicos.componen
 import { ModalLocaisComponent } from './modal-locais/modal-locais.component';
 import { ModalRlColaboradoresServicosComponent } from './modal-rl-colaboradores-servicos/modal-rl-colaboradores-servicos.component';
 import { ModalRlColabServFormComponent } from './modal-rl-colab-serv-form/modal-rl-colab-serv-form.component';
-import { ModalServicoLocalComponent } from './modal-servico-local/modal-servico-local.component';
-import { ModalColaboradorLocalComponent } from './modal-colaborador-local/modal-colaborador-local.component';
+import { ModalLocalColaboradoresServicosComponent } from './modal-local-colaboradores-servicos/modal-local-colaboradores-servicos.component';
+
 
 
 @NgModule({
@@ -24,8 +24,7 @@ import { ModalColaboradorLocalComponent } from './modal-colaborador-local/modal-
     ModalLocaisComponent,
     ModalRlColaboradoresServicosComponent,
     ModalRlColabServFormComponent,
-    ModalServicoLocalComponent,
-    ModalColaboradorLocalComponent,
+    ModalLocalColaboradoresServicosComponent
   ],
   imports: [
     Angular2SmartTableModule,

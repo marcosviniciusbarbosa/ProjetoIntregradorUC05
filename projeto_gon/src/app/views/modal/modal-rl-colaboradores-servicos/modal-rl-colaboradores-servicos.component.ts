@@ -8,14 +8,13 @@ import { ModalRlColabServFormComponent } from '../modal-rl-colab-serv-form/modal
 @Component({
   selector: 'app-modal-rl-colaboradores-servicos',
   templateUrl: './modal-rl-colaboradores-servicos.component.html',
-  styleUrls: ['./modal-rl-colaboradores-servicos.component.scss']
+  styleUrls: ['./modal-rl-colaboradores-servicos.component.scss'],
 })
 export class ModalRlColaboradoresServicosComponent {
-
   @Input() id_colaborador: number | undefined;
   @Input() id: number = 0;
   @Input() metodo: string = 'POST';
-  
+
   private api: string = 'apiRelacaoColaboradorServico.php';
 
   public source: LocalDataSource = new LocalDataSource();
@@ -39,9 +38,9 @@ export class ModalRlColaboradoresServicosComponent {
       delete: false,
       custom: [
         {
-          name: 'edit',
+          name: 'delete',
           title:
-            '<div class="text-center"><i class="bi bi-pencil-square"></i></div>',
+            '<div class="text-center"><i class="bi bi-trash3-fill"></i></div>',
         },
       ],
     },
@@ -60,44 +59,18 @@ export class ModalRlColaboradoresServicosComponent {
         width: '90px',
         classContent: 'text-center',
       },
-      status: {
-        title: 'STATUS',
-        classContent: 'text-center',
-        sortDirection: 'desc',
-        type: IColumnType.Html,
-      },
     },
   };
 
   constructor(
     private _provider: ApiService,
     private _dialogService: NbDialogService,
-    private _dialogRef: NbDialogRef<ModalRlColaboradoresServicosComponent>,
+    private _dialogRef: NbDialogRef<ModalRlColaboradoresServicosComponent>
   ) {}
 
   ngOnInit(): void {
     // CARREGAR DADOS NA TABELA
     this.getDados(this.id_colaborador);
-  }
-
-  onOptions(event: any) {
-    // console.log(event);
-    if (event.action == 'edit') {
-      // OPÇÃO PARA EDITAR
-      this.showDialog('PUT');
-    }
-  }
-
-  status(result: any[]) {
-    for (let i = 0; i < result.length; i++) {
-      if (result[i].status == 1) {
-        result[i].status =
-          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-success'><i class='bi bi-check-circle fs-3'></i></a></div>";
-      } else {
-        result[i].status =
-          "<div class='text-center'><a class='d-flex justify-content-center align-items-center text-danger'><i class='bi bi-x-circle fs-3'></i></a></div>";
-      }
-    }
   }
 
   public getDados(id_colaborador: any) {
@@ -108,7 +81,7 @@ export class ModalRlColaboradoresServicosComponent {
 
     if (id_colaborador > 0) {
       url = this.api + '?id_colaborador=' + id_colaborador + '&filtro=0';
-    }else{
+    } else {
       url = this.api + '?id_colaborador=' + this.id_colaborador + '&filtro=0';
     }
 
@@ -116,7 +89,6 @@ export class ModalRlColaboradoresServicosComponent {
       (data) => {
         // CARREGAR DADOS NA TABELA
         if (data['status'] === 'success') {
-          this.status(data['result']);
           this.source.load(data['result']);
         } else {
           this.loading = false;
@@ -130,7 +102,38 @@ export class ModalRlColaboradoresServicosComponent {
       }
     );
   }
-  
+
+  onOptions(event: any) {
+    if (event && event.action === 'delete') {
+      this.loading = true;
+      this.source = new LocalDataSource();
+
+      const url = this.api;
+
+      const dados = {
+        form: {
+          id_relacao: event.data.id_relacao,
+        },
+      };
+
+      this._provider.deleteAPI(dados, url).subscribe(
+        (data) => {
+          // Verifica o status da resposta
+          if (data && data['status'] === 'success') {
+            this.getDados(this.id_colaborador);
+          } else {
+            this.loading = false;
+          }
+        },
+        (error: any) => {
+          this.loading = false;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
+    }
+  }
 
   showDialog(metodo: string) {
     this._dialogService
@@ -152,5 +155,4 @@ export class ModalRlColaboradoresServicosComponent {
     this._dialogRef.close();
   }
   // FECHA MODAL COLABORADORES-SERVIÇOS - FIM
-
 }

@@ -7,8 +7,7 @@ import { IColumnType, LocalDataSource, Settings } from 'angular2-smart-table';
 
 import { ModalLocaisComponent } from '../../modal/modal-locais/modal-locais.component';
 
-import { ModalServicoLocalComponent } from '../../modal/modal-servico-local/modal-servico-local.component';
-import { ModalColaboradorLocalComponent } from '../../modal/modal-colaborador-local/modal-colaborador-local.component';
+import { ModalLocalColaboradoresServicosComponent } from 'src/app/views/modal/modal-local-colaboradores-servicos/modal-local-colaboradores-servicos.component';
 
 type NewType = number;
 @Component({
@@ -16,18 +15,10 @@ type NewType = number;
     <div class="text-center d-flex justify-content-around">
       <a
         class="d-flex justify-content-center align-items-center"
-        title="Lista de Colaboradores"
-        status="info"
-        (click)="onColaboradores()"
-        ><i class="bi bi-people-fill fs-4"></i
-      ></a>
-      <a
-        class="d-flex justify-content-center align-items-center"
         title="Lista de Serviços"
         status="info"
-        (click)="onServicos()"
-        ><i class="bi bi-card-list fs-4"></i
-      ></a>
+        (click)="onColaboradoresServicos()"
+        ><i class="bi bi-person-lines-fill fs-4"></i></a>
     </div>
   `,
   styleUrls: ['./locais.component.scss'],
@@ -40,20 +31,8 @@ export class BtnServicosColaboradoresComponent implements OnInit {
 
   ngOnInit() {}
 
-  onColaboradores() {
-    this._dialogService.open(ModalColaboradorLocalComponent, {
-      context: {
-        id_local: this.rowData.id_local,
-      },
-      closeOnEsc: true,
-      hasBackdrop: true,
-      closeOnBackdropClick: true,
-      hasScroll: true,
-    });
-  }
-
-  onServicos() {
-    this._dialogService.open(ModalServicoLocalComponent, {
+  onColaboradoresServicos() {
+    this._dialogService.open(ModalLocalColaboradoresServicosComponent, {
       context: {
         id_local: this.rowData.id_local,
       },
