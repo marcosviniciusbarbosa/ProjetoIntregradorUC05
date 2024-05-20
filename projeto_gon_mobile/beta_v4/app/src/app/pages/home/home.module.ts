@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { HomePage } from './home.page';
+
+import { HomePageRoutingModule } from './home-routing.module';
+import { HeaderLocalNotifComponent } from '../../component/header/local-notif/header-local-notif.component';
+import { TabsComponent } from 'src/app/component/tabs/tabs.component';
+
+@NgModule({
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  declarations: [
+    HomePage,
+    HeaderLocalNotifComponent,
+    TabsComponent
+  ],
+})
+export class HomePageModule {}
