@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="p-4 ">
+  <div class="w-100 text-center">
+    <img class="img-fluid w-75" src="../../../assets/img/logo.png" alt="">
+  </div>
+  <div class="">
+    <form class="form-floating">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="exemplo@exemplo.com">
+
+      <label for="senha">Senha</label>
+      <input type="password" class="form-control mt-2" id="senha">
+      <div class="d-flex justify-content-between align-items-center my-1">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="conectado">
+          <label class="form-check-label" for="conectado">
+            Lembre de mim
+          </label>
+        </div>
+        <a href="">Esqueceu sua senha?</a>
+      </div>
+      <button class="btn background-primary mt-2 w-100 text-light" type="submit">Entrar</button>
+      Não tem uma conta? <span class="primary">Cadastre-se</span>
+    </form>
+    <div class="d-flex align-items-center">
+      <div class="border-bottom border-black" style="width: 48%; height:0;"></div>
+      <div class="">Ou</div>
+      <div class="border-bottom border-black" style="width: 48%;height:0;"></div>
+    </div>
+  </div>
+</div>
