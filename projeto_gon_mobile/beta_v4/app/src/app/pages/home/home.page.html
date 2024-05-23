@@ -10,7 +10,7 @@
 <div class="ion-page" id="main-content">
   <app-header-local-notif></app-header-local-notif>
   <ion-content [fullscreen]="true">
-    <div class="row background-primary p-5" style="height: 30%;">
+    <div class="row background-primary p-5">
       <div
         class="d-flex justify-content-center align-items-center p-4 border  border-2 border-bottom-0 rounded-4 border-black bg-light">
         <div class="col-2">
@@ -124,5 +124,10 @@
       </div>
     </div>
   </ion-content>
-  <app-tabs></app-tabs>
+  <ion-footer collapse="fade">
+    <ion-toolbar>
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+  <!-- <app-tabs></app-tabs> -->
 </div>
