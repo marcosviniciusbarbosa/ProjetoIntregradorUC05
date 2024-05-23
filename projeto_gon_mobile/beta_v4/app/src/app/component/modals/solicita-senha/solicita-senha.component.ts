@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { VerificaCodigoComponent } from '../verifica-codigo/verifica-codigo.component';
 
 @Component({
   selector: 'app-solicita-senha',
@@ -15,5 +16,12 @@ export class SolicitaSenhaComponent {
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: VerificaCodigoComponent,
+    });
+    modal.present();
   }
 }
