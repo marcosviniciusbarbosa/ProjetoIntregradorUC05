@@ -5,10 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header-local-notif.component.html',
   styleUrls: ['./header-local-notif.component.scss'],
 })
-export class HeaderLocalNotifComponent  implements OnInit {
+export class HeaderLocalNotifComponent{
 
   constructor() { }
-
-  ngOnInit() {}
 
 }

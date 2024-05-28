@@ -5,10 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header-search.component.html',
   styleUrls: ['./header-search.component.scss'],
 })
-export class HeaderSearchComponent  implements OnInit {
+export class HeaderSearchComponent{
 
   constructor() { }
 
-  ngOnInit() {}
 
 }
