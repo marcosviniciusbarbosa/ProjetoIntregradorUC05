@@ -10,9 +10,44 @@ register();
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  items = [
+    {
+      id: 1,
+      nomeBarbearia: 'Nome da Barbearia',
+      nota: '4,7',
+      km: '2,3 km'
+    },
+    {
+      id: 2,
+      nomeBarbearia: 'Nome da Barbearia',
+      nota: '4,7',
+      km: '2,3 km'
+    },
+    {
+      id: 3,
+      nomeBarbearia: 'Nome da Barbearia',
+      nota: '4,7',
+      km: '2,3 km'
+    },
+    {
+      id: 4,
+      nomeBarbearia: 'Nome da Barbearia',
+      nota: '4,7',
+      km: '2,3 km'
+    },
+    {
+      id: 5,
+      nomeBarbearia: 'Nome da Barbearia',
+      nota: '4,7',
+      km: '2,3 km'
+    },
+  ]
+
+
   tesouraPente: string = '../assets/img/tesoura-e-pente.png';
-  nomeBarbearia: string = 'Nome da Barberria';
-  nota: string = '4,7';
-  km: string = '2,3 km';
+  // nomeBarbearia: string = 'Nome da Barberria';
+  // nota: string = '4,7';
+  // km: string = '2,3 km';
   constructor() {}
 }

@@ -8,6 +8,7 @@ import { SearchResultsPageRoutingModule } from './search-results-routing.module'
 import { HeaderSearchComponent } from 'src/app/component/header/search/header-search.component';
 
 import { SearchResultsPage } from './search-results.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SearchResultsPage } from './search-results.page';
     FormsModule,
     IonicModule,
     SearchResultsPageRoutingModule,
+    RouterModule.forChild([{ path: '', component: SearchResultsPage }])
   ],
   declarations: [SearchResultsPage, HeaderSearchComponent]
 })

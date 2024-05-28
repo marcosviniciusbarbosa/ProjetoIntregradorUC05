@@ -37,30 +37,32 @@
         </div>
         <div class="mt-2">
           <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
-            <swiper-slide>
-              <div style="width:100px">
-                <div class="w-100 text-center">
-                  <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
-                  <span>{{nomeBarbearia}}</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="">
-                    <ion-icon name="star-outline"></ion-icon>
-                    <span>{{nota}}</span>
+            <div class="" *ngFor="let item of items" style="margin-right: 20px;">
+              <swiper-slide>
+                <div style="width:100px">
+                  <div class="w-100 text-center">
+                    <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
+                    <span>{{item.nomeBarbearia}}</span>
                   </div>
-                  <div class="">
-                    <span>{{km}}</span>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                      <ion-icon name="star-outline"></ion-icon>
+                      <span>{{item.nota}}</span>
+                    </div>
+                    <div class="">
+                      <span>{{item.km}}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </swiper-slide>
+              </swiper-slide>
+            </div>
           </swiper-container>
         </div>
       </div>
       <div class="my-3">
         <div class="d-flex justify-content-between">
           <div class="">
-            <span>Próximas</span><br>
+            <span>Recente</span><br>
           </div>
           <div>
             <a class="link-offset-2 link-underline link-underline-opacity-0" href=""><span class="primary">Ver
@@ -69,30 +71,32 @@
         </div>
         <div class="mt-2">
           <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
-            <swiper-slide>
-              <div style="width:100px">
-                <div class="w-100 text-center">
-                  <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
-                  <span>{{nomeBarbearia}}</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="">
-                    <ion-icon name="star-outline"></ion-icon>
-                    <span>{{nota}}</span>
+            <div class="" *ngFor="let item of items" style="margin-right: 20px;">
+              <swiper-slide>
+                <div style="width:100px">
+                  <div class="w-100 text-center">
+                    <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
+                    <span>{{item.nomeBarbearia}}</span>
                   </div>
-                  <div class="">
-                    <span>{{km}}</span>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                      <ion-icon name="star-outline"></ion-icon>
+                      <span>{{item.nota}}</span>
+                    </div>
+                    <div class="">
+                      <span>{{item.km}}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </swiper-slide>
+              </swiper-slide>
+            </div>
           </swiper-container>
         </div>
       </div>
       <div class="my-3">
         <div class="d-flex justify-content-between">
           <div class="">
-            <span>Melhores Avaliadas</span><br>
+            <span>Recente</span><br>
           </div>
           <div>
             <a class="link-offset-2 link-underline link-underline-opacity-0" href=""><span class="primary">Ver
@@ -101,27 +105,96 @@
         </div>
         <div class="mt-2">
           <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
-            <swiper-slide>
-              <div style="width:100px">
-                <div class="w-100 text-center">
-                  <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
-                  <span>{{nomeBarbearia}}</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="">
-                    <ion-icon name="star-outline"></ion-icon>
-                    <span>{{nota}}</span>
+            <div class="" *ngFor="let item of items" style="margin-right: 20px;">
+              <swiper-slide>
+                <div style="width:100px">
+                  <div class="w-100 text-center">
+                    <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
+                    <span>{{item.nomeBarbearia}}</span>
                   </div>
-                  <div class="">
-                    <span>{{km}}</span>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                      <ion-icon name="star-outline"></ion-icon>
+                      <span>{{item.nota}}</span>
+                    </div>
+                    <div class="">
+                      <span>{{item.km}}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </swiper-slide>
+              </swiper-slide>
+            </div>
+          </swiper-container>
+        </div>
+      </div>
+      <div class="my-3">
+        <div class="d-flex justify-content-between">
+          <div class="">
+            <span>Recente</span><br>
+          </div>
+          <div>
+            <a class="link-offset-2 link-underline link-underline-opacity-0" href=""><span class="primary">Ver
+                todos</span></a>
+          </div>
+        </div>
+        <div class="mt-2">
+          <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
+            <div class="" *ngFor="let item of items" style="margin-right: 20px;">
+              <swiper-slide>
+                <div style="width:100px">
+                  <div class="w-100 text-center">
+                    <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
+                    <span>{{item.nomeBarbearia}}</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                      <ion-icon name="star-outline"></ion-icon>
+                      <span>{{item.nota}}</span>
+                    </div>
+                    <div class="">
+                      <span>{{item.km}}</span>
+                    </div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </div>
+          </swiper-container>
+        </div>
+      </div>
+      <div class="my-3">
+        <div class="d-flex justify-content-between">
+          <div class="">
+            <span>Recente</span><br>
+          </div>
+          <div>
+            <a class="link-offset-2 link-underline link-underline-opacity-0" href=""><span class="primary">Ver
+                todos</span></a>
+          </div>
+        </div>
+        <div class="mt-2">
+          <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
+            <div class="" *ngFor="let item of items" style="margin-right: 20px;">
+              <swiper-slide>
+                <div style="width:100px">
+                  <div class="w-100 text-center">
+                    <img class="img-fluid rounded" src="https://placehold.co/100x100" alt=""><br>
+                    <span>{{item.nomeBarbearia}}</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                      <ion-icon name="star-outline"></ion-icon>
+                      <span>{{item.nota}}</span>
+                    </div>
+                    <div class="">
+                      <span>{{item.km}}</span>
+                    </div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </div>
           </swiper-container>
         </div>
       </div>
     </div>
-    <app-tabs></app-tabs>
   </ion-content>
 </div>
